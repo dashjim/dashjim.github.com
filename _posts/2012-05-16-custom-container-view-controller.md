@@ -99,11 +99,12 @@ otherViewController还是是可以立刻收到viewWillAppear和viewDidAppear的�
 总的来说实现兼容iOS 4和iOS 5的容器有不少问题和注意点的
     
 1. view加入view层级前后分别调用viewWillAppear和viewDidAppear;容器的viewWillAppear，viewDidAppear,viewWillDisappear,viewDidDisappear中需要对当前显示的Child View Controller调用相同的方法
-2. 容器的shouldAutorotateToInterfaceOrientation中需要检测每一个Child View Controller的shouldAutorotateToInterfaceOrientation如果一个不支持，则看做不支持
-3. 容器的willRotateToInterfaceOrientation，didRotateFromInterfaceOrientation，willAnimateRotationToInterfaceOrientation方法中需要将事件传递给所有的Child View Controller
-4. 由于UIViewController的parentViewController属性为只读，且iOS4中没有提供容器支持的接口（iOS 5中容器支持的接口会间接的维护这个属性），所以为了使得childViewController和容器得以关联，我们可以顶一个View Controller的基类，添加一个比如叫做superController的属性用来指定对应的parentViewController
-5. 由于UIViewController的interfaceOrientation为只读属性，且iOS5中没有提供容器接口，所以UIViewController的这个interfaceOrientation变的不可性，为了取得当前UIViewController的orientation我们可以用UIWindow下的rootViewController的interfaceOrientation的值
-6. 容器的viewDidUnload方法中需要对view未释放的childViewController的view进行释放，且调用其viewDidUnload方法
+2. 容器需要保证Child View Controller的viewWillAppear调用之前Child View Controller的view已经load了
+3. 容器的shouldAutorotateToInterfaceOrientation中需要检测每一个Child View Controller的shouldAutorotateToInterfaceOrientation如果一个不支持，则看做不支持
+4. 容器的willRotateToInterfaceOrientation，didRotateFromInterfaceOrientation，willAnimateRotationToInterfaceOrientation方法中需要将事件传递给所有的Child View Controller
+5. 由于UIViewController的parentViewController属性为只读，且iOS4中没有提供容器支持的接口（iOS 5中容器支持的接口会间接的维护这个属性），所以为了使得childViewController和容器得以关联，我们可以顶一个View Controller的基类，添加一个比如叫做superController的属性用来指定对应的parentViewController
+6. 由于UIViewController的interfaceOrientation为只读属性，且iOS5中没有提供容器接口，所以UIViewController的这个interfaceOrientation变的不可信，为了取得当前UIViewController的orientation我们可以用UIWindow下的rootViewController的interfaceOrientation的值
+7. 容器的viewDidUnload方法中需要对view未释放的childViewController的view进行释放，且调用其viewDidUnload方法
 
 
        

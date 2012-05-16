@@ -25,13 +25,17 @@ view加载后viewDidLoad会被调用，这里可以进行一些数据的请求�
 4. 以addSubview的方式将使其view作为另一个View Controller的view的subView
 
 直接使用4种方法是比较危险的,上一级 View Controller并不能对当前View Controller的 生命周期相关的函数进行调用，以及旋转事件的传递等。
+     
 
+    
 ### 二.Hierarchy
 
 我们知道一个View可以将另一个View添加为子View(subview),构成一个View Hierarchy.当某一个View添加到window的View Hierarchy中时,将被“显示”。每一个View Controller管理着的其实就是一个View Hierarchy.而View Controller本身可以有Child View Controller,所以也存在一个 View Controller Hierarchy的概念,当View Controller收到上层传来的事件(比如旋转，被显示)的时候，需要传递给它的Child View Controller.
 一般情况下，View Hierarchy 和 View Controller Hierarchy需要保持一致性，比如一个View Controller的view的superView是由其parent view controller管理着
 ![Hierarchy](http://farm8.staticflickr.com/7105/7208538724_c77ed287c2_d.jpg)
 
+
+     
 
 ### 三.Container
 
@@ -49,7 +53,8 @@ view加载后viewDidLoad会被调用，这里可以进行一些数据的请求�
 从上面可以看出来,实现一个Container View Controller并不是一个简单的事情,好在iPhone的界面大小有限，一般情况下一个View Controller的view都是充满界面或者系统自带容器的，我们无需自己创建额外的容器,但是在iPad中情况就不同了。
 
 
-  
+     
+
 ### 四.Custom Container View Controller
 
 在iOS 5之前框架并不支持自定义 Container View Controller, iOS 5开始开放了一些新的接口来支持支持自定义容器
@@ -92,7 +97,7 @@ otherViewController还是是可以立刻收到viewWillAppear和viewDidAppear的�
 
 
 总的来说实现兼容iOS 4和iOS 5的容器有不少问题和注意点的
-
+    
 1. view加入view层级前后分别调用viewWillAppear和viewDidAppear;容器的viewWillAppear，viewDidAppear,viewWillDisappear,viewDidDisappear中需要对当前显示的Child View Controller调用相同的方法
 2. 容器的shouldAutorotateToInterfaceOrientation中需要检测每一个Child View Controller的shouldAutorotateToInterfaceOrientation如果一个不支持，则看做不支持
 3. 容器的willRotateToInterfaceOrientation，didRotateFromInterfaceOrientation，willAnimateRotationToInterfaceOrientation方法中需要将事件传递给所有的Child View Controller
@@ -101,6 +106,6 @@ otherViewController还是是可以立刻收到viewWillAppear和viewDidAppear的�
 6. 容器的viewDidUnload方法中需要对view未释放的childViewController的view进行释放，且调用其viewDidUnload方法
 
 
-    
+       
      
 > 苹果对UIViewController以及其使用有着非常详细的文档 [UIViewController Reference](http://developer.apple.com/library/ios/#DOCUMENTATION/UIKit/Reference/UIViewController_Class/Reference/Reference.html) , [ViewController Programming Guide](http://developer.apple.com/library/ios/#featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html)。

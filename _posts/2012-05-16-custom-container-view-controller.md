@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 关于自定义视图容器(Container View Controller)
+title: Container View Controller
 categories:
 - Programming
 tags:
@@ -8,7 +8,7 @@ tags:
 - UIViewController
 ---
 
-苹果对UIViewController以及其使用有着非常详细的文档 [UIViewController Reference](http://developer.apple.com/library/ios/#DOCUMENTATION/UIKit/Reference/UIViewController_Class/Reference/Reference.html) , [ViewController Programming Guide](http://developer.apple.com/library/ios/#featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html)。
+> 苹果对UIViewController以及其使用有着非常详细的文档 [UIViewController Reference](http://developer.apple.com/library/ios/#DOCUMENTATION/UIKit/Reference/UIViewController_Class/Reference/Reference.html) , [ViewController Programming Guide](http://developer.apple.com/library/ios/#featuredarticles/ViewControllerPGforiPhoneOS/Introduction/Introduction.html)。
 
 ### 一.UIViewController
 作为iOS开发, 经常会和UIViewController打交道，从类名便可知道UIViewController属于MVC模型中的C(Controller)，说的更具体点它是一个视图控制器,管理着一个视图(view)。 
@@ -28,13 +28,18 @@ view加载后viewDidLoad会被调用，这里可以进行一些数据的请求�
 
 直接使用4种方法是比较危险的,上一级 View Controller并不能对当前View Controller的 生命周期相关的函数进行调用，以及旋转事件的传递等。
 
+### 二.Hierarchy
 
-  
-### 二.Container
+我们知道一个View可以将另一个View添加为子View(subview),构成一个View Hierarchy.当某一个View在keywindow(UIWindow继承于UIView)的View Hierarchy中时,是被“显示”的。每一个View Controller管理着的其实就是一个View Hierarchy.而View Controller本身可以有Child View Controller,所以也存在一个 View Controller Hierarchy的概念,当View Controller收到上层传来的事件(比如旋转，被显示)的时候，需要传递给它的Child View Controller.
+一般情况下，我们需要保证View Hierarchy 和 View Controller Hierarchy保持一致，比如一个View Controller的view的superView是由其parent view controller管理着
+
+
+### 三.Container
 
 一个iOS的app很少只由一个ViewController组成，除非这个app极其简单。
 当有多个View Controller的时候，我们就需要对这些View Controller进行管理。
 那些负责一个或者多个View Controller的展示并对其视图生命周期进行管理的对象，称之为容器，大部分容器本身也是一个View Controller，这样的容器可以称之为Container View Controller，有个别容器不是View Controller，比如UIPopoverController其继承于NSObject。
+    
 我们常用的容器有 UINavigationController,UITabbarController等，一般容器有一些共同的特征:
 
 1. 提供对Child View Controller进行管理的接口，比如添加Child View Controller,切换Child View Controller的显示,移除Child View Controller 等
@@ -48,7 +53,7 @@ view加载后viewDidLoad会被调用，这里可以进行一些数据的请求�
 
 
   
-### 三.Custom Container View Controller
+### 四.Custom Container View Controller
 
 在iOS 5之前框架并不支持自定义 Container View Controller, iOS 5开始开放了一些新的接口来支持支持自定义容器
 

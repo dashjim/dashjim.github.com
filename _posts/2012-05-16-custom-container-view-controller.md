@@ -31,7 +31,7 @@ view加载后viewDidLoad会被调用,这里可以进行一些数据的请求或�
 <br><br>    
 ### 二.Hierarchy
 
-我们知道一个View可以将另一个View添加为子View(subview),构成一个View Hierarchy.当某一个View添加到window的View Hierarchy中时,将被“显示”。每一个View Controller管理着的其实就是一个View Hierarchy.而View Controller本身可以有Child View Controller,所以也存在一个 View Controller Hierarchy的概念,当View Controller收到上层传来的事件(比如旋转,被显示)的时候,需要传递给它的Child View Controller.
+我们知道一个View可以将另一个View添加为子View(subview),构成一个View Hierarchy.当某一个View添加到window的View Hierarchy中时,将被“显示”。每一个View Controller管理着的其实就是一个View Hierarchy.而View Controller本身可以有Child View Controller,所以也存在一个 View Controller Hierarchy的概念,当View Controller收到上层传来的诸如旋转，显示事件的时候,需要传递给它的Child View Controller.
 一般情况下,View Hierarchy 和 View Controller Hierarchy需要保持一致性,比如一个View Controller的view的superView是由其parent view controller管理着
 ![Hierarchy](http://farm8.staticflickr.com/7105/7208538724_c77ed287c2_d.jpg)
 
@@ -102,7 +102,7 @@ otherViewController还是是可以立刻收到viewWillAppear和viewDidAppear的�
     
 1. view加入view层级前后分别调用viewWillAppear和viewDidAppear;容器的viewWillAppear,viewDidAppear,viewWillDisappear,viewDidDisappear中需要对当前显示的Child View Controller调用相同的方法,容器需要保证Child View Controller的viewWillAppear调用之前Child View Controller的view已经load了.还有一点就是保证容器的View不会出现bounds为CGRectZero的情况,因为如果此View包含多个subview,其bounds改变的时候subview会根据自己的autoresizingMask改变frame,但是当bounds变为0再变为非0的时候,subview的frame就有可能不是你想要的了(比如某个subview的autoresizingMask为UIViewAutoresizingFlexibleBottomMargin)
 2. 容器的shouldAutorotateToInterfaceOrientation中需要检测每一个Child View Controller的shouldAutorotateToInterfaceOrientation如果一个不支持,则看做不支持
-3. 容器的willRotateToInterfaceOrientation,didRotateFromInterfaceOrientation,willAnimateRotationToInterfaceOrientation方法中需要将事件传递给所有的Child View Controller
+3. 容器的willRotateToInterfaceOrientation,didRotateFromInterfaceOrientation,willAnimateRotationToInterfaceOrientation方法中需要将这些事件传递给所有的Child View Controller
 4. 由于UIViewController的parentViewController属性为只读,且iOS4中没有提供容器支持的接口（iOS 5中容器支持的接口会间接的维护这个属性）,所以为了使得childViewController和容器得以关联,我们可以顶一个View Controller的基类,添加一个比如叫做superController的属性用来指定对应的parentViewController
 5. 由于UIViewController的interfaceOrientation为只读属性,且iOS5中没有提供容器接口,所以UIViewController的这个interfaceOrientation变的不可信,为了取得当前UIViewController的orientation我们可以用UIWindow下的rootViewController的interfaceOrientation的值
 6. 容器的viewDidUnload方法中需要对view未释放的childViewController的view进行释放,且调用其viewDidUnload方法

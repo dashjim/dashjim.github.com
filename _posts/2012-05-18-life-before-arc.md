@@ -116,9 +116,9 @@ AutoreleasePool是可以嵌套的,你可以想象成每创建一个NSAutorelease
 
 {% highlight objc %}
 for (int i = 0; i < numberOfImages; ++i) { 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	/* 	* Loading images, etc. 	* Too many autoreleased objects exist. */
+	//Loading images, etc. 	//Too many autoreleased objects exist. 
 	[pool drain];
-	/* 	* All the autoreleased objects are released by [pool drain]. */
+	//All the autoreleased objects are released by [pool drain]. 
 }
 {% endhighlight %}
 
@@ -134,9 +134,9 @@ AutoreleasePool的实现为AutoreleasePoolPage类，是用C++来实现的。
 
 
 {% highlight objc %}
-NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; /* 等价于 objc_autoreleasePoolPush() */
+NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init]; //等价于objc_autoreleasePoolPush() 
 id obj = [[NSObject alloc] init];
-[obj autorelease]; /* 等价于 objc_autorelease(obj) */
-[pool drain]; /* 等价于 objc_autoreleasePoolPop(pool) */
+[obj autorelease];//等价于 objc_autorelease(obj) 
+[pool drain];// 等价于 objc_autoreleasePoolPop(pool) 
 {% endhighlight %}
 

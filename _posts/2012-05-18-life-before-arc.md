@@ -102,11 +102,8 @@ id obj = [[NSObject alloc] init];
 ![Autorelase Pool](http://farm6.staticflickr.com/5332/7225706146_bec59b116a.jpg)   
 
 当对objc调用autorelease方法时候，便释放其所有权,此时当前活动的autorelease pool拥有此对象,当当前活动autorelease pool被销毁时,autorelease pool所拥有的所有对象会收到release消息.
-AutoreleasePool不能调用autorelease方法，否则会报错
-
-> *** Terminating app due to uncaught exception 'NSInvalidArgumentException' reason: '*** -[NSAutoreleasePool autorelease]:
-Cannot autorelease an autorelease pool'
-
+AutoreleasePool不能调用autorelease方法，否则会报错.   
+<br>
 很多时候我们发现并不需要自己去创建Autorelease Pool,这是为什么呢？
 因为在主线程中每一次RunLoop开始的时候会自动创建一个Autorelease Pool,结束的时候销毁这个Autorelease Pool
 ![Runloop Autorelease Pool](http://farm8.staticflickr.com/7233/7225706212_8c66a0cb80.jpg)
@@ -115,8 +112,10 @@ AutoreleasePool是可以嵌套的,你可以想象成每创建一个NSAutorelease
 有时候我们为了程序的性能考虑，需要自己在适当的地方加上autorelease pool,以便及时释放掉内存.比如下面这种情况
 
 {% highlight objc %}
-for (int i = 0; i < numberOfImages; ++i) { 	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
-	//Loading images, etc. 	//Too many autoreleased objects exist. 
+for (int i = 0; i < numberOfImages; ++i) {
+	NSAutoreleasePool *pool = [[NSAutoreleasePool alloc] init];
+	//Loading images, etc.
+	//Too many autoreleased objects exist. 
 	[pool drain];
 	//All the autoreleased objects are released by [pool drain]. 
 }

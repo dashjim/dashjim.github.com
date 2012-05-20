@@ -126,6 +126,7 @@ for (int i = 0; i < numberOfImages; ++i) {
 和autorelease相关的源码在此文件中 [http://opensource.apple.com/source/objc4/objc4-493.11/runtime/objc-arr.mm](http://opensource.apple.com/source/objc4/objc4-493.11/runtime/objc-arr.mm) 
 AutoreleasePool的实现为AutoreleasePoolPage类，是用C++来实现的。
 其中有一个重要的方法需要说明一下的,
+
 - objc_autoreleasePoolPush 创建一个AutoreleasePool并push到堆栈中
 - objc_autorelease 将对象放到当前活动的AutoreleasePool中
 - objc_autoreleasePoolPop 将当前活动的AutoreleasePool从堆栈中pop出去(即被销毁)

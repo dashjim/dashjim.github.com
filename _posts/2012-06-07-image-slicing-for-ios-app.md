@@ -6,6 +6,8 @@ categories:
 tags:
 - iOS
 - Photoshop
+- Slicing
+- image
 ---
 
 图形用户界面中的图形有两种实现方式，一种是用代码画出来，比如Quartz 2D技术，狠一点有OpenGL ES，另一种则是使用图片。   

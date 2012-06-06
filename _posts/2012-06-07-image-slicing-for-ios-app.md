@@ -21,7 +21,8 @@ Color Pattern在Web设计中也经常会遇到比如网页的背景,甚至网络
 ![circles](http://farm8.staticflickr.com/7238/7160467573_a21e1c947b_t.jpg)
 <br>
 {% highlight objc %}
-UIColor *circleColorPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_pattern.png"]];
+UIColor *circleColorPattern = [UIColor colorWithPatternImage:
+[UIImage imageNamed:@"circle_pattern.png"]];
 {% endhighlight %}
 这样便可以得到一个颜色模板,用这个颜色画或者填充某个区域的时候，模板图片会在指定的区域中进行平铺.比如把一个View的背景颜色设置成上面这个颜色，便会得到如下结果
 <br>
@@ -49,14 +50,14 @@ UIColor *circleColorPattern = [UIColor colorWithPatternImage:[UIImage imageNamed
 UIImage *buttonBackgroundImage = [[UIImage imageNamed:@"button_bkg.png"] 
 resizableImageWithCapInsets:UIEdgeInsetsMake(0,13,0,13)];
 [button setBackgroundImage:buttonBackgroundImage 
-                                  forState:UIControlStateNormal];
+forState:UIControlStateNormal];
 {% endhighlight %}
 resizableImageWithCapInsets:的参数是一个UIEdgeInsets的结构体类型,被capInsets覆盖到的区域将会保持不变，而未覆盖到的部分将会被平铺在剩余的区域上.   
 
  在iOS 5.0之前并没有这个方法，而是使用的另一个方法
  {% highlight objc %}
  - (UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth 
-                                                         topCapHeight:(NSInteger)topCapHeight;
+topCapHeight:(NSInteger)topCapHeight;
 {% endhighlight %}
 这个方法有局限性，它只能指定leftCapWidth和topCapHeight，然后只有一个像素能够重复，也就是rightCapWidth为 imageWidth-leftCapWidth-1,而bottomCapHeight为 imageHeight - topCapHeight -1,所以重复的始终是中间的那一个像素.
 

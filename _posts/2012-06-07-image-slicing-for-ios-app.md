@@ -16,14 +16,14 @@ tags:
 在用户界面的图形元素中，重复随处可见 ,所以我们利用好框架提供的接口, 以比较高的性价比创建用户界面。
 #### 1.Color Pattern
 Color Pattern在Web设计中也经常会遇到比如网页的背景,甚至网络中可以找到专门收集各类可重复的纹理图案的站点,比如 [http://subtlepatterns.com](http://subtlepatterns.com).
-比如这样的一个小图片模板   
+下面这是一个小图片模板   
 <br>
 ![circles](http://farm8.staticflickr.com/7238/7160467573_a21e1c947b_t.jpg)
 <br>
 {% highlight objc %}
 UIColor *circleColorPattern = [UIColor colorWithPatternImage:[UIImage imageNamed:@"circle_pattern.png"]];
 {% endhighlight %}
-这样便可以得到一个颜色模板,用这个颜色绘画或者填充某个区域的时候，上面的图片会在指定的区域中进行平铺.比如将一个View的背景颜色设置成这个颜色，便会得到如下结果
+这样便可以得到一个颜色模板,用这个颜色画或者填充某个区域的时候，模板图片会在指定的区域中进行平铺.比如把一个View的背景颜色设置成上面这个颜色，便会得到如下结果
 <br>
 ![circles_fill](http://farm8.staticflickr.com/7085/7160467655_e2806877c7.jpg)
 <br>
@@ -46,14 +46,17 @@ UIColor *circleColorPattern = [UIColor colorWithPatternImage:[UIImage imageNamed
 图片宽度为27像素宽，中间第14个像素为中间重复的部分.
 
 {% highlight objc %}
-UIImage *buttonBackgroundImage = [[UIImage imageNamed:@"button_bkg.png"] resizableImageWithCapInsets:UIEdgeInsetsMake(0,13,0,13)];
-[button setBackgroundImage:buttonBackgroundImage forState:UIControlStateNormal];
+UIImage *buttonBackgroundImage = [[UIImage imageNamed:@"button_bkg.png"] 
+resizableImageWithCapInsets:UIEdgeInsetsMake(0,13,0,13)];
+[button setBackgroundImage:buttonBackgroundImage 
+                                  forState:UIControlStateNormal];
 {% endhighlight %}
 resizableImageWithCapInsets:的参数是一个UIEdgeInsets的结构体类型,被capInsets覆盖到的区域将会保持不变，而未覆盖到的部分将会被平铺在剩余的区域上.   
 
  在iOS 5.0之前并没有这个方法，而是使用的另一个方法
  {% highlight objc %}
- - (UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth topCapHeight:(NSInteger)topCapHeight;
+ - (UIImage *)stretchableImageWithLeftCapWidth:(NSInteger)leftCapWidth 
+                                                         topCapHeight:(NSInteger)topCapHeight;
 {% endhighlight %}
 这个方法有局限性，它只能指定leftCapWidth和topCapHeight，然后只有一个像素能够重复，也就是rightCapWidth为 imageWidth-leftCapWidth-1,而bottomCapHeight为 imageHeight - topCapHeight -1,所以重复的始终是中间的那一个像素.
 

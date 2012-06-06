@@ -52,7 +52,7 @@ resizableImageWithCapInsets:UIEdgeInsetsMake(0,13,0,13)];
 [button setBackgroundImage:buttonBackgroundImage 
 forState:UIControlStateNormal];
 {% endhighlight %}
-resizableImageWithCapInsets:的参数是一个UIEdgeInsets的结构体类型,被capInsets覆盖到的区域将会保持不变，而未覆盖到的部分将会被平铺在剩余的区域上.   
+resizableImageWithCapInsets:的参数是一个UIEdgeInsets的结构体类型,被capInsets覆盖到的区域将会保持不变，而未覆盖到的部分将会被用来平铺.   
 
  在iOS 5.0之前并没有这个方法，而是使用的另一个方法
  {% highlight objc %}

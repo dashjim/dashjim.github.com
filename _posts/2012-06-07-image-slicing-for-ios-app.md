@@ -37,6 +37,9 @@ UIColor *circleColorPattern = [UIColor colorWithPatternImage:
 ![button-blue](http://farm8.staticflickr.com/7219/7345749786_18422b630d_m.jpg)
 但是自己看，你会发现按钮中间大都数像素都是横向重复的，所以可以使用iOS的图片接口来使用体积更小的图片实现相同的效果.
 首先使用PS的切图工具进行切图,下图中的切图逻辑是，左边切14像素(13像素加1像素，1像素为中间重复部分),右边切13像素.
+    
+> Retina屏幕下一个单位对应着两个像素，这里的例子是非Retina下的情况，请注意
+
 <br>
 ![button-blue-slicing](http://farm8.staticflickr.com/7071/7160590813_382d13dcec_z.jpg)
 <br>

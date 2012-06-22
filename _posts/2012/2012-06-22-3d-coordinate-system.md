@@ -46,6 +46,8 @@ tags:
 
 #### 3.Quartz坐标系
 Quartz（Core Graphics）坐标系使用的右手坐标系,***原点在左下角***,所以所有使用Core Graphics画图的坐标系都是右手坐标系，当使用CG的相关函数画图到UIView上的时候，需要注意CTM的Flip变换，要不然会出现界面上图形倒过来的现象。由于UIKit的提供的高层方法会自动处理CTM（比如UIImage的drawInRect方法），所以无需自己在CG的上下文中做处理。
+参见[Quartz 2D Coordinate Systems](https://developer.apple.com/library/mac/#documentation/graphicsimaging/conceptual/drawingwithquartz2d/dq_overview/dq_overview.html#//apple_ref/doc/uid/TP30001066-CH202-CJBBAEEC)
 
 #### 4.CALayer坐标系
 这个有些变态了，其坐标系和平台有关，在Mac中CALayer使用的是右手坐标系，其原点在左下角；iOS中使用的左手坐标系，其原点在左上角。
+参见 [Layer Coordinate System](http://developer.apple.com/library/ios/#DOCUMENTATION/Cocoa/Conceptual/CoreAnimation_guide/Articles/Layers.html#//apple_ref/doc/uid/TP40006082-SW1)

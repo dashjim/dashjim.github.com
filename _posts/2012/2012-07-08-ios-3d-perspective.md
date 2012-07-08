@@ -11,7 +11,7 @@ tags:
 
 #### 一.概述   
 在iOS中使用CATransform3D这个结构体来表示三维的齐次坐标变换矩阵.
-齐次坐标是一种坐标的表示方法，n维空间的坐标需要用n+1个元素的坐标元组来表示,在[Quartz 2D Transform](https://developer.apple.com/library/mac/documentation/graphicsimaging/conceptual/drawingwithquartz2d/dq_affine/dq_affine.html#//apple_ref/doc/uid/TP30001066-CH204-CJBECIAD)中就有关于齐次坐标的应用,这里是关于二维空间的变换，其某点的齐次坐标的最后一个元素始终设置为1。使用齐次坐标而不是简单的数学坐标是为了方便图形进行仿射变换，仿射变换可以通过仿射变换矩阵来实现，3D的仿射变换可以实现诸如 平移(translation)，旋转(rotation),缩放(scaling),切变(shear)等变换。如果不用齐次坐标那么进行坐标变换可能就涉及到两种运算了，加法（平移）和乘法（旋转，缩放），而使用齐次坐标以及齐次坐标变换矩阵后只需要矩阵乘法就可以完成一切了。上面的这些如果需要深入了解就需要去学习一下图形变换的相关知识，自己对矩阵的乘法进行演算。
+齐次坐标是一种坐标的表示方法，n维空间的坐标需要用n+1个元素的坐标元组来表示,在[Quartz 2D Transform](https://developer.apple.com/library/mac/documentation/graphicsimaging/conceptual/drawingwithquartz2d/dq_affine/dq_affine.html#//apple_ref/doc/uid/TP30001066-CH204-CJBECIAD)中就有关于齐次坐标的应用,那边是关于二维空间的变换，其某点的齐次坐标的最后一个元素始终设置为1。使用齐次坐标而不是简单的数学坐标是为了方便图形进行仿射变换，仿射变换可以通过仿射变换矩阵来实现，3D的仿射变换可以实现诸如 平移(translation)，旋转(rotation),缩放(scaling),切变(shear)等变换。如果不用齐次坐标那么进行坐标变换可能就涉及到两种运算了，加法（平移）和乘法（旋转，缩放），而使用齐次坐标以及齐次坐标变换矩阵后只需要矩阵乘法就可以完成一切了。上面的这些如果需要深入了解就需要去学习一下图形变换的相关知识，自己对矩阵的乘法进行演算。
 
 iOS中的CALayer的3D本质上并不能算真正的3D(其视点即观察点或者所谓的照相机的位置是无法变换的),而只是在3D在二维平面上的投影，投影平面就是手机屏幕也就是xy轴组成的平面(注意iOS中为左手坐标系)，那么视点的位置是如何确定的呢？可以通过CATransform3D中的m34来间接指定， m34 = -1/z,其中z为观察点在z轴上的值,而Layer的z轴的位置则是通过anchorPoint来指定的，所谓的anchorPoint(锚点)就是在变换中保持不变的点，也就是某个Layer在变换中的原点,xyz三轴相交于此点。在iOS中，Layer的anchorPoint使用unit coordinate space来描述，unit coordinate space无需指定具体真实的坐标点而是使用layer bounds中的相对位置，下图展示了一个Layer中的几个特殊的锚点,    
 ![](http://farm9.staticflickr.com/8164/7525485756_6782ed8ce6.jpg)

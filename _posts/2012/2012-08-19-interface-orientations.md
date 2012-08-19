@@ -8,6 +8,7 @@ tags:
 - UIKit
 ---
 
+
 ####一.UISupportedInterfaceOrientations
 
 这个UIKit的设定可以通过XCode工具来设定.      

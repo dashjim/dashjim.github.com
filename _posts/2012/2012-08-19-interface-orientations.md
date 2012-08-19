@@ -1,6 +1,6 @@
 ---
 layout: post
-title:Interface Orientations
+title: Interface Orientations
 categories:
 - Programming
 tags:

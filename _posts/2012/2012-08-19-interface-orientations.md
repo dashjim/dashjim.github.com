@@ -68,7 +68,7 @@ UIViewController 有几个方法可以让子类来覆盖
 
 当旋转结束后，此方法会被调用。
 
-#### 三.UIViewController旋转的本质 
+### 三.UIViewController旋转的本质 
 
 为了探究在UIViewController旋转的过程中到底发生了什么，可以新建一个Single View的项目用来测试。
 ViewController设置为UIWindow的rootViewController.当旋转的时候rootViewController旋转相关的方法会被调用，且rootViewController的view会发生旋转。

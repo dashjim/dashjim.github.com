@@ -80,3 +80,5 @@ animations = { transform=<CABasicAnimation: 0x6a79840>; position=<CABasicAnimati
 
 旋转结束之后为如下样子     
 ![](http://farm9.staticflickr.com/8429/7813372386_05eba9d8a4.jpg)
+
+只有知道旋转的本质之后，很多事情理解起来就深刻多了。

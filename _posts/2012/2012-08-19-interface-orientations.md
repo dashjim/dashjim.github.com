@@ -1,4 +1,12 @@
-Interface Orientations
+---
+layout: post
+title:Interface Orientations
+categories:
+- Programming
+tags:
+- iOS
+- UIKit
+---
 
 ####一.UISupportedInterfaceOrientations
 

@@ -27,7 +27,7 @@ Layer也和View一样存在着一个层级树状结构,称之为图层树(Layer 
 
 
 #### 2.事务管理
-CALayer的那些可用于动画的(Animatable)属性,称之为Animatable Properties,这里有一份详情的列表,罗列了所有的[CALayer Animatable Properties](http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/CoreAnimation_guide/Articles/AnimProps.html).
+CALayer的那些可用于动画的(Animatable)属性,称之为Animatable Properties,这里有一份详情的列表,罗列了所有的 [CALayer Animatable Properties](http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/CoreAnimation_guide/Articles/AnimProps.html).
 如果一个Layer对象存在对应着的View,则称这个Layer是一个Root Layer,非Root Layer一般都是通过CALayer或其子类直接创建的.下面的subLayer就是一个典型的非Root Layer,它没有对应的View对象关联着.
 {% highlight objc %}
     subLayer = [[CALayer alloc] init];
@@ -38,7 +38,11 @@ CALayer的那些可用于动画的(Animatable)属性,称之为Animatable Propert
       
 
 所有的非Root Layer在设置Animatable Properties的时候都存在着隐式动画,默认的duration是0.25秒.
-而Root Layer则不存在隐式动画,需要显式的使用CAAnimation或者UIView的animation相关方法来创建animation.    
+{% highlight objc %}
+    subLayer.position = CGPointMake(300,400);
+{% endhighlight %}
+像上面这段代码当下一个RunLoop开始的时候并不是直接将subLayer的position变成(300,400)的,而是有个移动的动画进行过渡完成的.      
+
 任何Layer的animatable属性的设置都应该属于某个CA事务(CATransaction),事务的作用是为了保证多个animatable属性的变化同时进行,不管是同一个layer还是不同的layer之间的.CATransaction也分两类,显式的和隐式的,当在某次RunLoop中设置一个animatable属性的时候,如果发现当前没有事务,则会自动创建一个CA事务,在线程的下个RunLoop开始时自动commit这个事务,如果在没有RunLoop的地方设置layer的animatable属性,则必须使用显式的事务.  
 
 
@@ -124,7 +128,7 @@ CABasicAnimation有三个比较重要的属性,fromValue,toValue,byValue,这三�
 
 时间函数是使用的一段函数来描述的,横座标是时间t取值范围是0.0-1.0,纵座标是变化量x(t)也是取值范围也是0.0-1.0
 假设有一个动画,duration是8秒,变化值的起点是a终点是b(假设是透明度),那么在4秒处的值是多少呢？
-可以通过计算为 a + x(4/8)*(b-a), 为什么这么计算呢？讲实现的时间映射到单位值的时候4秒相对于总时间8秒就是0.5然后可以得到0.5的时候单位变化量是 x(0.5), x(0.5)/1 = 实际变化量/(b-a), 其中b-a为总变化量,所以实际变化量就是x(0.5)*(b-a) ,最后4秒时的值就是 a + x(0.5)*(b-a),所以计算的本质是映射。
+可以通过计算为 a + x(4/8) * (b-a), 为什么这么计算呢？讲实现的时间映射到单位值的时候4秒相对于总时间8秒就是0.5然后可以得到0.5的时候单位变化量是 x(0.5), x(0.5)/1 = 实际变化量/(b-a), 其中b-a为总变化量,所以实际变化量就是x(0.5) * (b-a) ,最后4秒时的值就是 a + x(0.5) * (b-a),所以计算的本质是映射。
 
 Timing Function对应的类是CAMediaTimingFunction,它提供了两种获得时间函数的方式，一种是使用预定义的五种时间函数，一种是通过给点两个控制点得到一个时间函数。
 相关的方法为
@@ -137,20 +141,41 @@ Timing Function对应的类是CAMediaTimingFunction,它提供了两种获得时�
 {% endhighlight %}
 
 五种预定义的时间函数名字的常量变量分别为    
-kCAMediaTimingFunctionLinear,
+kCAMediaTimingFunctionLinear,    
 kCAMediaTimingFunctionEaseIn,   
 kCAMediaTimingFunctionEaseOut,    
 kCAMediaTimingFunctionEaseInEaseOut,    
 kCAMediaTimingFunctionDefault.   
+下图展示了前面四种Timing Function的曲线图,横座标表示时间，纵座标表示变化量，这点需要搞清楚(并不是平面座标系中xy)。
 ![](http://ww1.sinaimg.cn/large/65cc0af7gw1dxlv7mhtj3j.jpg)  
-自定义的Timing Function的函数图像就是一条三次贝塞尔曲线(Cubic Bezier Curve),贝塞尔曲线的优点就是光滑，用在这里就使得变化显得光滑。一条三次贝塞尔曲线可以由起点终点以及两个控制点决定。其中kCAMediaTimingFunctionDefault对应的函数曲线其实就是通过[(0.0,0.0), (0.25,0.1), (0.25,0.1), (1.0,1.0)]这四个点决定的三次贝塞尔曲线,头尾为起点和终点,中间的两个点是控制点.   
+自定义的Timing Function的函数图像就是一条三次贝塞尔曲线[Cubic Bezier Curve](http://zh.wikipedia.org/zh-cn/%E8%B4%9D%E5%A1%9E%E5%B0%94%E6%9B%B2%E7%BA%BF),贝塞尔曲线的优点就是光滑，用在这里就使得变化显得光滑。一条三次贝塞尔曲线可以由起点终点以及两个控制点决定。     
+上面的kCAMediaTimingFunctionDefault对应的函数曲线其实就是通过[(0.0,0.0), (0.25,0.1), (0.25,0.1), (1.0,1.0)]这四个点决定的三次贝塞尔曲线,头尾为起点和终点,中间的两个点是控制点.   
+![](http://ww2.sinaimg.cn/large/65cc0af7gw1dxm21gxjr0j.jpg)    
+上图中P0是起点,P3是终点，P1和P2是两个控制点   
 
 如果时间变化曲线既不是直线也不是贝塞尔曲线,而是自定义的，又或者某个图层运动的轨迹不是直线而是一个曲线，这些是基本动画无法做到的,所以引入下面的内容，CAKeyframeAnimation,也即所谓的关键帧动画。
 
 #### 3.CAKeyframeAnimation
-任何动画要表现出运动或者变化,至少需要两个不同的关键状态，而中间的状态的变化可以通过插值计算完成，表示关键状态的帧叫做关键帧。
+任何动画要表现出运动或者变化,至少需要两个不同的关键状态，而中间的状态的变化可以通过插值计算完成，从而形成补间动画，表示关键状态的帧叫做关键帧。
 ![](http://ww3.sinaimg.cn/large/65cc0af7gw1dxlv01a1jmj.jpg)
-CABasicAnimation其实可以看作一种特殊的关键帧状态，只有头尾两个关键帧。CAKeyframeAnimation则可以支持任意多个关键帧，关键帧有两种方式来指定，使用path或者使用values，path是一个CGPathRef的值，且path只能对CALayer的 anchorPoint 和 position 属性起作用，且设置了path之后values就不再起效了。而values则更加灵活。
+CABasicAnimation其实可以看作一种特殊的关键帧动画，只有头尾两个关键帧。CAKeyframeAnimation则可以支持任意多个关键帧，关键帧有两种方式来指定，使用path或者使用values，path是一个CGPathRef的值，且path只能对CALayer的 anchorPoint 和 position 属性起作用，且设置了path之后values就不再起效了。而values则更加灵活。
+keyTimes这个可选参数可以为对应的关键帧指定对应的时间点，其取值范围为0到1.0，keyTimes中的每一个时间值都对应values中的每一帧.当keyTimes没有设置的时候，各个关键帧的时间是平分的。   
+还可以通过设置可选参数timingFunctions(CAKeyframeAnimation中timingFunction是无效的)为关键帧之间的过渡设置timingFunction，如果values有n个元素，那么timingFunctions则应该有n-1个。但很多时候并不需要timingFunctions，因为已经设置了够多的关键帧了，比如没1/60秒就设置了一个关键帧，那么帧率将达到60FPS，完全不需要相邻两帧的过渡效果（当然也有可能某两帧 值相距较大，可以使用均匀变化或者增加帧率，比如每0.01秒设置一个关键帧）。
+
+在关键帧动画中还有一个非常重要的参数，那便是calculationMode，计算模式。其主要针对的是每一帧的内容为一个座标点的情况，也就是对anchorPoint 和 position 进行的动画。当在平面座标系中有多个离散的点的时候，可以是离散的，也可以直线相连后进行插值计算，也可以使用圆滑的曲线将他们相连后进行插值计算。
+calculationMode目前提供如下几种模式
+kCAAnimationLinear   
+kCAAnimationDiscrete   
+kCAAnimationPaced   
+kCAAnimationCubic   
+kCAAnimationCubicPaced
+
+calculationMode默认值是kCAAnimationLinear，表示当关键帧为座标点的时候，关键帧之间直接直线相连进行插值计算；   
+kCAAnimationDiscrete 离散的，就是不进行插值计算，直接挨个关键帧进行显示   
+kCAAnimationPaced 使得动画均匀进行，而不是按keyTimes设置的或者按关键帧平分时间，此时keyTimes和timingFunctions无效   
+kCAAnimationCubic 对座标点的关键帧进行圆滑曲线相连后插值计算，对于曲线的形状还可以通过tensionValues,continuityValues,biasValues来进行调整自定义，这里的数学原理是[Kochanek–Bartels spline](http://en.wikipedia.org/wiki/Kochanek-Bartels_spline),这里的主要目的是使得运行的轨迹变得圆滑。   
+kCAAnimationCubicPaced 看这个名字就知道和kCAAnimationCubic有一定联系，其实就是在kCAAnimationCubic的基础上使得动画运行变得均匀，就是系统时间内运动的距离相同，此时keyTimes以及timingFunctions也是无效的。   
+
 
 
 

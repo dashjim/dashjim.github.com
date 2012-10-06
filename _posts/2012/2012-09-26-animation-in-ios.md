@@ -179,3 +179,8 @@ kCAAnimationCubicPaced
 
 
 
+<br>
+最后推荐下WWDC 2010和2011上的关于Animation相关的Session,大家可以找找来看.
+
+
+

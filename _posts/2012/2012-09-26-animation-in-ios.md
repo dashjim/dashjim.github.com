@@ -136,7 +136,12 @@ Timing Function对应的类是CAMediaTimingFunction,它提供了两种获得时�
 - (id)initWithControlPoints:(float)c1x :(float)c1y :(float)c2x :(float)c2y;
 {% endhighlight %}
 
-五种预定义的时间函数名字的常量变量分别为 kCAMediaTimingFunctionLinear,kCAMediaTimingFunctionEaseIn,kCAMediaTimingFunctionEaseOut,kCAMediaTimingFunctionEaseInEaseOut,kCAMediaTimingFunctionDefault.   
+五种预定义的时间函数名字的常量变量分别为    
+kCAMediaTimingFunctionLinear,
+kCAMediaTimingFunctionEaseIn,   
+kCAMediaTimingFunctionEaseOut,    
+kCAMediaTimingFunctionEaseInEaseOut,    
+kCAMediaTimingFunctionDefault.   
 ![](http://ww1.sinaimg.cn/large/65cc0af7gw1dxlv7mhtj3j.jpg)  
 自定义的Timing Function的函数图像就是一条三次贝塞尔曲线(Cubic Bezier Curve),贝塞尔曲线的优点就是光滑，用在这里就使得变化显得光滑。一条三次贝塞尔曲线可以由起点终点以及两个控制点决定。其中kCAMediaTimingFunctionDefault对应的函数曲线其实就是通过[(0.0,0.0), (0.25,0.1), (0.25,0.1), (1.0,1.0)]这四个点决定的三次贝塞尔曲线,头尾为起点和终点,中间的两个点是控制点.   
 

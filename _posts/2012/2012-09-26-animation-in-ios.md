@@ -22,9 +22,8 @@ Animation则包含了动画的时间,变化,以及变化的速度.下面分别�
 我们都知道UIView是MVC中的View.UIView的职责在于界面的显示和界面事件的处理.每一个View的背后都有一个layer(可以通过view.layer进行访问),layer是用于界面显示的.CALayer属于QuartzCore框架,非常重要,但并没有想象中的那么好理解.我们通常操作的用于显示的Layer在Core Animation这层的概念中其实担当的是数据模型Model的角色,它并不直接做渲染的工作.关于Layer,之前从座标系的角度分析过,这次则侧重于它的时间系统.
 
 #### 1.Layer的渲染架构
-Layer也和View一样存在着一个层级树状结构,称之为图层树(Layer Tree),直接创建的或者通过UIView获得的(view.layer)用于显示的图层树,称之为模型树(Model Tree),模型树的背后还存在两份图层树的拷贝,一个是呈现树(Presentation Tree),一个是渲染树(Render Tree). 模型树的属性在其被修改的时候就变成了新的值,这个是可以用代码直接操控的部分;呈现树的属性值和动画运行过程中界面上看到的是一致的.而渲染树是私有的,你无法访问到,渲染树是对呈现树的数据进行渲染,为了不阻塞主线程,渲染的过程是在单独的进程或线程中进行的,所以你会发现Animation的动画并不会阻塞主线程.
-
-
+Layer也和View一样存在着一个层级树状结构,称之为图层树(Layer Tree),直接创建的或者通过UIView获得的(view.layer)用于显示的图层树,称之为模型树(Model Tree),模型树的背后还存在两份图层树的拷贝,一个是呈现树(Presentation Tree),一个是渲染树(Render Tree). 
+呈现树可以通过普通layer(其实就是模型树)的layer.presentationLayer获得,而模型树则可以通过modelLayer属性获得(详情文档).模型树的属性在其被修改的时候就变成了新的值,这个是可以用代码直接操控的部分;呈现树的属性值和动画运行过程中界面上看到的是一致的.而渲染树是私有的,你无法访问到,渲染树是对呈现树的数据进行渲染,为了不阻塞主线程,渲染的过程是在单独的进程或线程中进行的,所以你会发现Animation的动画并不会阻塞主线程.
 
 #### 2.事务管理
 CALayer的那些可用于动画的(Animatable)属性,称之为Animatable Properties,这里有一份详情的列表,罗列了所有的 [CALayer Animatable Properties](http://developer.apple.com/library/ios/#documentation/Cocoa/Conceptual/CoreAnimation_guide/Articles/AnimProps.html).
@@ -82,24 +81,27 @@ CALayer通过CAMediaTiming协议实现了一个有层级关系的时间系统.�
 #### timeOffset
 这个timeOffset可能是这几个属性中比较难理解的一个,官方的文档也没有讲的很清楚.
 local time也分成两种一种是active local time 一种是basic local time.  
-timeOffset则是active local time的便宜量.   
-你将一个动画看作一个环,timeOffset改变的其实是动画在环内的起点,比如一个duration为5秒的动画,将timeOffset设置为2(或者7,模5为2),那么动画的运行则是从原来的2秒开始到5秒,接着在0秒到2秒,完成一次动画.
+timeOffset则是active local time的偏移量.   
+你将一个动画看作一个环,timeOffset改变的其实是动画在环内的起点,比如一个duration为5秒的动画,将timeOffset设置为2(或者7,模5为2),那么动画的运行则是从原来的2秒开始到5秒,接着再0秒到2秒,完成一次动画.
 
 #### speed
-speed属性用于设置当前对象的时间流相对于父级对象的流逝速度,比如一个动画beginTime是0,但是speed是2,那么这个动画的1秒处相当于父级对象时间流中的2秒处.
+speed属性用于设置当前对象的时间流相对于父级对象时间流的流逝速度,比如一个动画beginTime是0,但是speed是2,那么这个动画的1秒处相当于父级对象时间流中的2秒处.
 speed越大则说明时间流逝速度越快,那动画也就越快.比如一个speed为2的layer其所有的父辈的speed都是1,它有一个subLayer,speed也为2,那么一个8秒的动画在这个运行于这个subLayer只需2秒(8 / (2 * 2)).所以speed有叠加的效果.
 
 #### fillMode
-fillMode的作用就是决定过了当前对象非active时间段的行为.
+fillMode的作用就是决定当前对象过了非active时间段的行为.
 比如动画开始之前,动画结束之后。如果是一个动画CAAnimation,则需要将其removedOnCompletion设置为NO,要不然fillMode不起作用.
 下面来讲各个fillMode的意义   
 **kCAFillModeRemoved**  这个是默认值,也就是说当动画开始前和动画结束后,动画对layer都没有影响,动画结束后,layer会恢复到之前的状态   
 **kCAFillModeForwards** 当动画结束后,layer会一直保持着动画最后的状态     
-**kCAFillModeBackwards**  这个和kCAFillModeForwards是相对,就是在动画开始前,你只要将动画加入了一个layer,layer便立即进入动画的初始状态并等待动画开始.你可以这样设定测试代码,将一个动画加入一个layer的时候延迟5秒执行.然后就会发现在动画没有开始的时候,只要动画被加入了layer,layer便处于动画初始状态    
+**kCAFillModeBackwards**  这个和kCAFillModeForwards是相对的,就是在动画开始前,你只要将动画加入了一个layer,layer便立即进入动画的初始状态并等待动画开始.你可以这样设定测试代码,将一个动画加入一个layer的时候延迟5秒执行.然后就会发现在动画没有开始的时候,只要动画被加入了layer,layer便处于动画初始状态    
 **kCAFillModeBoth** 理解了上面两个,这个就很好理解了,这个其实就是上面两个的合成.动画加入后开始之前,layer便处于动画初始状态,动画结束后layer保持动画最后的状态.   
 
+其他的一些参数都是比较容易理解的.
 
-实际应用参见苹果官方 QA1673 [How to pause the animation of a layer tree](https://developer.apple.com/library/ios/#qa/qa2009/qa1673.html)
+
+#### 实际应用
+参见苹果官方 QA1673 [How to pause the animation of a layer tree](https://developer.apple.com/library/ios/#qa/qa2009/qa1673.html)
 
 {% highlight objc %}
 -(void)pauseLayer:(CALayer*)layer
@@ -121,7 +123,7 @@ fillMode的作用就是决定过了当前对象非active时间段的行为.
 {% endhighlight %}
     
 
-### 三.Animation
+### 三.显式动画Animation
 当需要对非Root Layer进行动画或者需要对动画做更多自定义的行为的时候,就必须使用到显式动画了,显式动画的基类为CAAnimation,常用的是CABasicAnimation,CAKeyframeAnimation有时候还会使用到CAAnimationGroup,CATransition(注意不是CATransaction,Transition是过渡的意思).   
 ![](http://ww1.sinaimg.cn/large/65cc0af7gw1dxlusbklpmj.jpg)      
 
@@ -190,7 +192,7 @@ kCAAnimationCubicPaced
 
 
 <br>
-最后推荐下WWDC 2010和2011上的关于Animation相关的Session,大家可以找找来看.
+最后推荐下WWDC 2010和2011上的关于Animation相关的Session,大家可以找找来看.2010的有说到Core Graphic相关内容.以及他们都从性能方面对CA做了些诠释.
 
 
 

@@ -81,13 +81,22 @@ CALayer通过CAMediaTiming协议实现了一个有层级关系的时间系统.�
 
 #### timeOffset
 这个timeOffset可能是这几个属性中比较难理解的一个,官方的文档也没有讲的很清楚.
-local time也分成两种一种是active local time 一种是basic local time
+local time也分成两种一种是active local time 一种是basic local time.  
+timeOffset则是active local time的便宜量.   
+你将一个动画看作一个环,timeOffset改变的其实是动画在环内的起点,比如一个duration为5秒的动画,将timeOffset设置为2(或者7,模5为2),那么动画的运行则是从原来的2秒开始到5秒,接着在0秒到2秒,完成一次动画.
 
 #### speed
+speed属性用于设置当前对象的时间流相对于父级对象的流逝速度,比如一个动画beginTime是0,但是speed是2,那么这个动画的1秒处相当于父级对象时间流中的2秒处.
+speed越大则说明时间流逝速度越快,那动画也就越快.比如一个speed为2的layer其所有的父辈的speed都是1,它有一个subLayer,speed也为2,那么一个8秒的动画在这个运行于这个subLayer只需2秒(8 / (2 * 2)).所以speed有叠加的效果.
 
 #### fillMode
-
-
+fillMode的作用就是决定过了当前对象非active时间段的行为.
+比如动画开始之前,动画结束之后。如果是一个动画CAAnimation,则需要将其removedOnCompletion设置为NO,要不然fillMode不起作用.
+下面来讲各个fillMode的意义   
+**kCAFillModeRemoved**  这个是默认值,也就是说当动画开始前和动画结束后,动画对layer都没有影响,动画结束后,layer会恢复到之前的状态   
+**kCAFillModeForwards** 当动画结束后,layer会一直保持着动画最后的状态     
+**kCAFillModeBackwards**  这个和kCAFillModeForwards是相对,就是在动画开始前,你只要将动画加入了一个layer,layer便立即进入动画的初始状态并等待动画开始.你可以这样设定测试代码,将一个动画加入一个layer的时候延迟5秒执行.然后就会发现在动画没有开始的时候,只要动画被加入了layer,layer便处于动画初始状态    
+**kCAFillModeBoth** 理解了上面两个,这个就很好理解了,这个其实就是上面两个的合成.动画加入后开始之前,layer便处于动画初始状态,动画结束后layer保持动画最后的状态.   
 
 
 实际应用参见苹果官方 QA1673 [How to pause the animation of a layer tree](https://developer.apple.com/library/ios/#qa/qa2009/qa1673.html)
@@ -110,11 +119,12 @@ local time也分成两种一种是active local time 一种是basic local time
     layer.beginTime = timeSincePause;
 }
 {% endhighlight %}
+    
 
 ### 三.Animation
+当需要对非Root Layer进行动画或者需要对动画做更多自定义的行为的时候,就必须使用到显式动画了,显式动画的基类为CAAnimation,常用的是CABasicAnimation,CAKeyframeAnimation有时候还会使用到CAAnimationGroup,CATransition(注意不是CATransaction,Transition是过渡的意思).   
 ![](http://ww1.sinaimg.cn/large/65cc0af7gw1dxlusbklpmj.jpg)      
 
-当需要对非Root Layer进行动画或者需要对动画做更多自定义的行为的时候,就必须使用到显式动画了,显式动画的基类为CAAnimation,常用的是CABasicAnimation,CAKeyframeAnimation有时候还会使用到CAAnimationGroup,CATransition(注意不是CATransaction,Transition是过渡的意思).
 这里再强调关于动画的两个重要的点:一是中间状态的插值计算(Interpolation),二是动画节奏控制(Timing); 有时候插值计算也和Timing有一定关系.
 如果状态是一维空间的值(比如透明度),那么插值计算的结果必然再起点值和终点值之间,如果状态是二维空间的值(比如position),那么一般情况下插值得到的点会落在起点和终点之间的线段上（当然也有可能连线是圆滑曲线）.
 #### 1.CABasicAnimation

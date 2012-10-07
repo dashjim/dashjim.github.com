@@ -136,7 +136,7 @@ CABasicAnimation有三个比较重要的属性,fromValue,toValue,byValue,这三�
 设置了动画的起点和终点之后,中间的值都是通过插值方式计算出来的.插值计算的结果由timingFunction指定,默认timingFunction为nil,会使用liner的,也就是变化是均匀的.     
 
 #### 2.Timing Function的作用
-正如上面所说,Timing Function的作用是用于变化的起点和终点之间的插值计算.形象点说是Timing Function决定了动画运行的节奏(Pacing),比如是均匀变化,先快后慢,先慢后快还是先慢再快再慢.
+Timing Function的会被用于变化起点和终点之间的插值计算.形象点说是Timing Function决定了动画运行的节奏(Pacing),比如是均匀变化(相同时间变化量相同),先快后慢,先慢后快还是先慢再快再慢.
 
 时间函数是使用的一段函数来描述的,横座标是时间t取值范围是0.0-1.0,纵座标是变化量x(t)也是取值范围也是0.0-1.0
 假设有一个动画,duration是8秒,变化值的起点是a终点是b(假设是透明度),那么在4秒处的值是多少呢？

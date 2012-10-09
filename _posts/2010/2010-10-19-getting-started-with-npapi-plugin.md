@@ -9,6 +9,12 @@ tags:
 - C
 ---
 
+2012-10-10 更新：https://code.google.com/p/chromium/issues/detail?id=139816 Chrome22之后貌似完全放弃10.5 Carbon之类的支持，所以Event Model需要进行设置，否则NPAPI插件在Chrome22下无法加载。NPP_New函数中进行如此设置
+{% highlight c %}
+    browser->setvalue(instance, NPPVpluginEventModel, (void *)NPEventModelCocoa);
+{% endhighlight %}
+-----
+
 最近需要写一个Mac平台上的简单的跨浏览器的插件，需要在js中调用本地方法，而npapi满足此要求。
 NPAPI就是Netscape Plugin Application Programming Interface的缩写了，虽然Netscape已经去了，但是这个却被沿用下来，在各大浏览器中都得以实现。还是纪念下曾经的浏览器的鼻祖啊。
 

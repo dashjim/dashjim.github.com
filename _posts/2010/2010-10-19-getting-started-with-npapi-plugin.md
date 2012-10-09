@@ -9,9 +9,11 @@ tags:
 - C
 ---
 
-2012-10-10 更新：https://code.google.com/p/chromium/issues/detail?id=139816 Chrome22之后貌似完全放弃10.5 Carbon之类的支持，所以Event Model需要进行设置，否则NPAPI插件在Chrome22下无法加载。NPP_New函数中进行如此设置
+2012-10-10 更新：[https://code.google.com/p/chromium/issues/detail?id=139816](https://code.google.com/p/chromium/issues/detail?id=139816) Chrome22之后貌似完全放弃10.5 Carbon之类的支持，所以Event Model需要进行设置，否则NPAPI插件在Chrome22下无法加载。NPP_New函数中进行如此设置
 {% highlight c %}
-    browser->setvalue(instance, NPPVpluginEventModel, (void *)NPEventModelCocoa);
+    browser->setvalue(instance, 
+    NPPVpluginEventModel, 
+    (void *)NPEventModelCocoa);
 {% endhighlight %}
 -----
 

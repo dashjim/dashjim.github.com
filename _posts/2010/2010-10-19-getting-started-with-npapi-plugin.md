@@ -18,7 +18,8 @@ tags:
 
 如果想学习NPAPI方面的知识，Mozila的官方wiki无疑是一个最佳的入口，[https://wiki.mozilla.org/NPAPI](https://wiki.mozilla.org/NPAPI)   
 FireBreath则可以作为实践的开端，[https://github.com/firebreath/FireBreath](https://github.com/firebreath/FireBreath)   
-融会贯通后便可以尝试从零开始写自己的插件了。
+融会贯通后便可以尝试从零开始写自己的插件了。   
+
 -----
 
 最近需要写一个Mac平台上的简单的跨浏览器的插件，需要在js中调用本地方法，而npapi满足此要求。

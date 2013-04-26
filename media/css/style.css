@@ -76,7 +76,7 @@ pre{
 	overflow:scroll;
 }
 
-code{
+p > code{
 	margin: 0 2px;
 	padding: 0px 5px;
 	border: 1px solid #eaeaea;

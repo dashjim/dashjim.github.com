@@ -6,8 +6,8 @@ categories:
 tags:
 - git
 ---
-
-git reflog是对reflog进行管理的命令，那么什么是reflog呢？   
+###使用git reflog查看引用变化
+[git reflog](https://www.kernel.org/pub/software/scm/git/docs/git-reflog.html)是对reflog进行管理的命令，那么什么是reflog呢？   
 reflog是git用来记录引用变化的一种机制，比如记录分支的变化或者是HEAD引用的变化。 
 比如在某git库中运行git reflog,当git reflog命令不指定引用的时候默认列出HEAD的reflog。
 
@@ -32,11 +32,12 @@ reflog是git用来记录引用变化的一种机制，比如记录分支的变�
 	cd2eddb HEAD@{18}: commit: prepare files
 	b39fed8 HEAD@{19}: commit (initial): first commit
   
-这里涉及到一个修订版本引用的语法,比如 HEAD@{0}代表HEAD当前的值，HEAD@{2}代表HEAD两次变化之前的值。详情的语法可以参看这里 [https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html](https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html)。
-从上面的输出结果可以看到HEAD所有的变化历史，从每一条记录中可以看出每次变化所对应的git操作，比如commit，checkout，rebase，merge等，以及变化的详情内容。   
+这里涉及到一个修订版本引用的语法,比如 HEAD@{0}代表HEAD当前的值，HEAD@{2}代表HEAD两次变化之前的值。详情的语法可以参看这里 [https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html](https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html)。   
+上面的输出结果为HEAD所有的变化历史，每一条记录包含了变化所对应的git操作，比如commit，checkout，rebase，merge等，以及变化的详情内容。      
 git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个detached HEAD（即不在任何分支只是在某个历史的commit的节点上）的时候进行了一次commit，然后你切换到另一个分支想把刚才的东西合并进来，这个时候突然意识到刚才的那次提交找不到了，这个时间你就可以通过HEAD@{1}引用到刚才的提交了，或者通过git reflog找到对应commit的sha1值，然后进行merge。
 <br>
 
+###reflog文件格式
 那么git系统是如何存储reflog的呢？这里继续拿HEAD来举例，git会将变化记录到HEAD对应的reflog文件中，其路径为.git/logs/HEAD，文件是一个纯文本文件。分支的reflog文件都放在.git/logs/refs目录下的子目录中。
 下面是HEAD的reflog文件的内容：
 
@@ -62,3 +63,7 @@ git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个d
     2ab4043c6c4c9f59e7756cb7fb5df4fdf467fe4b 2ab4043c6c4c9f59e7756cb7fb5df4fdf467fe4b 卢克 <kejinlu@gmail.com> 1366958770 +0800	checkout: moving from master to a
 
 从上面HEAD的reflog的log文件的内容可以看到，每一个reflog的entry都包含了变化前commit节点的sha1值以及变化后的commit节点的sha1值，如果你阅读了git的源码你会看到这两个值对应的变量名为osha1（old sha1）和nsha1（new sha1），第一次commit对应变化的old sha1值为全0的特殊值；每一个entry还包含了用户名，email ，变化的时间戳以及变化的具体内容。
+
+<br>
+###reflog高级操作
+关于entry的删除，过期失效以及和垃圾回收的关联。未完待续...

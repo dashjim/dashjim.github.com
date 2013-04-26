@@ -34,7 +34,7 @@ reflog是git用来记录引用变化的一种机制，比如记录分支的变�
   
 这里涉及到一个修订版本引用的语法,比如 HEAD@{0}代表HEAD当前的值，HEAD@{2}代表HEAD两次变化之前的值。详情的语法可以参看这里 [https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html](https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html)。   
 上面的输出结果为HEAD所有的变化历史，每一条记录包含了变化所对应的git操作，比如commit，checkout，rebase，merge等，以及变化的详情内容。      
-git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个detached HEAD（即不在任何分支只是在某个历史的commit的节点上）的时候进行了一次commit，然后你切换到另一个分支想把刚才的东西合并进来，这个时候突然意识到刚才的那次提交找不到了，这个时间你就可以通过HEAD@{1}引用到刚才的提交了，或者通过git reflog找到对应commit的sha1值，然后进行merge。
+git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个detached HEAD（即不在任何分支只是在某个历史的commit的节点上）的时候进行了一次commit，然后你切换到另一个分支想把刚才的东西合并进来，这个时候突然意识到刚才的那次提交找不到了，这时你就可以通过HEAD@{1}引用到刚才的提交了，或者通过git reflog找到对应commit的sha1值，然后进行merge。
 <br>
 
 ###reflog文件格式

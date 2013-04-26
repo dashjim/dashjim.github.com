@@ -74,7 +74,7 @@ code{
 	border-radius: 3px;
 }
 
-pre{
+pre < code{
 	background-color: #f8f8f8;
 	border: 1px solid #ccc;
 	font-size: 13px;
@@ -82,10 +82,6 @@ pre{
 	padding: 6px 10px;
 	border-radius: 3px;
 	overflow:scroll;
-}
-
-pre code{
-	
 }
 
 embed,object,iframe{display:block;margin:4px auto;}

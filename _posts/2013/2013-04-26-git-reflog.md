@@ -37,7 +37,7 @@ reflog是git用来记录引用变化的一种机制，比如记录分支的变�
 git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个detached HEAD（即不在任何分支只是在某个历史的commit的节点上）的时候进行了一次commit，然后你切换到另一个分支想把刚才的东西合并进来，这个时候突然意识到刚才的那次提交找不到了，这个时间你就可以通过HEAD@{1}引用到刚才的提交了，或者通过git reflog找到对应commit的sha1值，然后进行merge。
 <br>
 
-那么git系统是如何存储reflog的呢？这里继续拿HEAD来举例，git会将变化记录到HEADH对应的reflog文件中，其路径为.git/logs/HEAD，文件是一个纯文本文件。分支的reflog文件都放在.git/logs/refs目录下的子目录中。
+那么git系统是如何存储reflog的呢？这里继续拿HEAD来举例，git会将变化记录到HEAD对应的reflog文件中，其路径为.git/logs/HEAD，文件是一个纯文本文件。分支的reflog文件都放在.git/logs/refs目录下的子目录中。
 下面是HEAD的reflog文件的内容：
 
     0000000000000000000000000000000000000000 b39fed82cd3225eb524f6f0184c0ba49a4f6952c 卢克 <kejinlu@gmail.com> 1366871718 +0800	commit (initial): first commit
@@ -61,4 +61,4 @@ git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个d
     bf985821e12129ea3dc9d4150792b8dae798773c 2ab4043c6c4c9f59e7756cb7fb5df4fdf467fe4b 卢克 <kejinlu@gmail.com> 1366882860 +0800	commit (merge): Merge branch 'mybranch'
     2ab4043c6c4c9f59e7756cb7fb5df4fdf467fe4b 2ab4043c6c4c9f59e7756cb7fb5df4fdf467fe4b 卢克 <kejinlu@gmail.com> 1366958770 +0800	checkout: moving from master to a
 
-从上面HEAD的reflog的log文件的内容可以看到，每一个reflog的entry都包含了变化前commit节点的sha1值以及变化后的commit节点的sha1值，如果你阅读了git的源码你会看到这两个值对应的变量名为osha1（old sha1）和nsha1（new sha1），第一次提交产生的变化的老的sha1值为全0的特殊值；还包含了用户名，email ，变化的时间戳以及变化的具体内容。
+从上面HEAD的reflog的log文件的内容可以看到，每一个reflog的entry都包含了变化前commit节点的sha1值以及变化后的commit节点的sha1值，如果你阅读了git的源码你会看到这两个值对应的变量名为osha1（old sha1）和nsha1（new sha1），第一次commit对应变化的old sha1值为全0的特殊值；每一个entry还包含了用户名，email ，变化的时间戳以及变化的具体内容。

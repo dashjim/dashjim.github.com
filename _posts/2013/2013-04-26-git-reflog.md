@@ -66,4 +66,4 @@ git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个d
 
 <br>
 ###reflog高级操作
-关于entry的删除，过期失效以及和垃圾回收的关联。未完待续...
+`git reflog delete ref@{specifier}` 可以用来删除指定的reflog entry，使得它从历史中消失，这个时候reflog并不是引用变化的真实历史了。前面讲了，每一个reflog entry都包含两个sha1，老sha1和新sha1，如果删除中间的某条entry的时候，就相当于断开了这种新老的关联，产生了gap，如果解决这个问题呢？可以在delete的时候加上`--rewrite选项`，它的作用就是使得删除掉的记录后面的entry的old sha1为现在前一条entry的new sha1值。

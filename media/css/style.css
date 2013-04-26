@@ -37,7 +37,7 @@ p{padding:.5em 0;}
 li{padding:.2em 0;}
 ol,ul{list-style-position:inside;}
 ol ul, ul ol, ul ul, ol ol {margin-left:1em;}
-pre{
+pre code{
 	background-color: #f8f8f8;
 	border: 1px solid #ccc;
 	font-size: 13px;

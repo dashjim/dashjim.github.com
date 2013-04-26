@@ -37,15 +37,6 @@ p{padding:.5em 0;}
 li{padding:.2em 0;}
 ol,ul{list-style-position:inside;}
 ol ul, ul ol, ul ul, ol ol {margin-left:1em;}
-pre code{
-	background-color: #f8f8f8;
-	border: 1px solid #ccc;
-	font-size: 13px;
-	line-height: 19px;
-	padding: 6px 10px;
-	border-radius: 3px;
-	overflow:scroll;
-}
 blockquote{display:block;text-align:justify;border-left:4px solid #eeeeee;}
 blockquote{margin:1em 0em;padding-left:1.5em;}
 blockquote p{margin:0;padding:.5em 0;}
@@ -81,6 +72,17 @@ code{
 	background-color: #f8f8f8;
 	border-radius: 3px;
 }
+
+pre code{
+	background-color: #f8f8f8;
+	border: 1px solid #ccc;
+	font-size: 13px;
+	line-height: 19px;
+	padding: 6px 10px;
+	border-radius: 3px;
+	overflow:scroll;
+}
+
 embed,object,iframe{display:block;margin:4px auto;}
 .gist{font-size: 12px;line-height:1.6;}
 

@@ -33,8 +33,8 @@ reflog是git用来记录引用变化的一种机制，比如记录分支的变�
 	b39fed8 HEAD@{19}: commit (initial): first commit
   
 这里涉及到一个修订版本引用的语法,比如 HEAD@{0}代表HEAD当前的值，HEAD@{2}代表HEAD两次变化之前的值。详情的语法可以参看这里 [https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html](https://www.kernel.org/pub/software/scm/git/docs/gitrevisions.html)。
-从上面的输出结果可以看到HEAD所有的变化历史，从每一条记录中可以看出每次变化所对应的git操作，比如commit，checkout，rebase，merge等，以及变化的详情内容。
-git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个detached HEAD（即不在任何分支只是在某个历史的commit的节点上）的时候进行了一次commit，然后你切换到另一个分支先把刚才的东西合并进来，这个时候突然意识到刚才的提交的东西找不到了，这个时间你就可以通过HEAD@{1}引用到刚才的提交了，或者通过git reflog找到对应commit的sha1值，然后进行merge。
+从上面的输出结果可以看到HEAD所有的变化历史，从每一条记录中可以看出每次变化所对应的git操作，比如commit，checkout，rebase，merge等，以及变化的详情内容。   
+git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个detached HEAD（即不在任何分支只是在某个历史的commit的节点上）的时候进行了一次commit，然后你切换到另一个分支想把刚才的东西合并进来，这个时候突然意识到刚才的那次提交找不到了，这个时间你就可以通过HEAD@{1}引用到刚才的提交了，或者通过git reflog找到对应commit的sha1值，然后进行merge。
 <br>
 
 那么git系统是如何存储reflog的呢？这里继续拿HEAD来举例，git会将变化记录到HEADH对应的reflog文件中，其路径为.git/logs/HEAD，文件是一个纯文本文件。分支的reflog文件都放在.git/logs/refs目录下的子目录中。

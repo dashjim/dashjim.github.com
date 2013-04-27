@@ -70,7 +70,10 @@ git reflog有时候可以帮助你找到丢失掉的commit，比如你在某个d
 如果从某个引用或者对象开始去遍历对象的有向图，无法达到某个指定对象，那么可以说这个指定对象unreachable from this reference or object。   
 如果一个对象unreachable from任何其他对象和引用，那么它便是悬空对象了。   
 
-之前我们提到，reflog entry会记录old sha1，new sha1的值，所以reflog 也算作对这两个sha1对应的对象的引用者。所以有时候虽然某个commit对象无法从任何一个引用引用到，但是它却不是真正的悬空对象，原因就是还有reflog对它的引用。
+之前我们提到，reflog entry会记录old sha1，new sha1的值，所以reflog 也算作对这两个sha1对应的对象的引用者。所以有时候虽然某个commit对象无法从任何一个引用引用到，但是它却不是真正的悬空对象，原因就是还有reflog对它的引用。所以有时候为了清理无用的对象，需要删除一些reflog entry。   
 
 `git reflog delete ref@{specifier}` 可以用来删除指定的reflog entry，使得它从历史中消失，这个时候reflog并不是引用变化的真实历史了。前面讲了，每一个reflog entry都包含两个sha1，老sha1和新sha1，如果删除中间的某条entry的时候，就相当于断开了这种新老的关联，产生了gap，如何解决这个问题呢？可以在delete的时候加上`--rewrite选项`，它的作用就是使得删除掉的记录后面的entry的old sha1为现在前一条entry的new sha1值。   
-有一些commit无法被分支或者其他类型的引用直接或者间接的引用到，比如rebase操作后产生的悬空commit。
+
+还有一种删除reflog entry的方式是使用其过期机制，`git reflog expire [--expire=<time>] [--expire-unreachable=<time>] <refs>`，如果不指定其中的相关时间的话，则使用git配置的 `gc.reflogExpire` 和 `gc.reflogExpireUnreachable`如果配置没有显式的配置则使用默认值，分别为90天和两周。   
+
+

@@ -158,38 +158,39 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 
 ####3.准备Discourse生产环境所需的配置文件
 
-- config/database.yml
+#####config/database.yml
 数据库的配置文件，主要配置数据库的用户名密码，以及相关hostname
  
 	cp database.yml.production-sample config/database.yml 
 	#然后对用户名密码以及对生产环境对应的host_names进行修改
 	vi config/database.yml 
 
-- config/redis.yml
+#####config/redis.yml
 配置文件可以直接使用样例
 
 	cp redis.yml.sample redis.yml #使用样例的配置即可，无需修改
 
-- environments/production.rb
+#####environments/production.rb
 次配置文件主要需要修改就是邮件发送的配置，如果你不想使用操作系统中的sendmail进行发送邮件,你可以选择第三方的smtp服务，
-比如我就是使用gmail的smtp进行发送的，相关配置如下：
+比如我就是使用gmail的smtp进行发送的，相关配置如下：     
 
-	 config.action_mailer.delivery_method = :smtp
-	 config.action_mailer.perform_deliveries = true
-	 config.action_mailer.raise_delivery_errors = true
-	 config.action_mailer.smtp_settings = {
-		 :address              => "smtp.gmail.com",
-		 :port                 => 587,
-		 :domain               => 'mail.google.com',
-		 :user_name            => 'info.mydiscourse@gmail.com',
-		 :password             => 'xxxxxxxx',
-		 :authentication       => 'plain',
-		 :enable_starttls_auto => true  }
-		 
-		 #config.action_mailer.delivery_method = :sendmail
-		 #config.action_mailer.sendmail_settings = {arguments: '-i'}
+	config.action_mailer.delivery_method = :smtp
+	config.action_mailer.perform_deliveries = true
+	config.action_mailer.raise_delivery_errors = true
+	config.action_mailer.smtp_settings = {
+	 :address              => "smtp.gmail.com",
+	 :port                 => 587,
+	 :domain               => 'mail.google.com',
+	 :user_name            => 'info.mydiscourse@gmail.com',
+	 :password             => 'xxxxxxxx',
+	 :authentication       => 'plain',
+	 :enable_starttls_auto => true  }
+	 
+	 #config.action_mailer.delivery_method = :sendmail
+	 #config.action_mailer.sendmail_settings = {arguments: '-i'}
 
-- initializers/secret_token.rb
+
+#####initializers/secret_token.rb
 这个文件是rails要用的，默认就存在了，只不过用于开发环境的，你需要生成一个新的secret并对这个文件进行修改
 
 	bundle exec rake secret
@@ -200,7 +201,7 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 
 	Discourse::Application.config.secret_token = "你生成的token贴到这里"
 
-- config/thin.yml
+#####config/thin.yml
 是用于thin的配置文件，
 
 	cp config/thin.yml.sample config/thin.yml
@@ -228,7 +229,7 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 	daemonize: true
 	onebyone: true
 
-- config/nginx.conf
+#####config/nginx.conf
 
 	cp config/nginx.conf.sample config/nginx.conf
 

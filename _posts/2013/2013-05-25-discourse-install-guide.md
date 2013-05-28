@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 使用Capistrano进行Discourse的自动化部署
+title: Discourse的自动化部署
 categories:
 - Programming
 tags:
@@ -20,7 +20,7 @@ Discourse的源码托管在github,[https://github.com/discourse/discourse](https
 创建好一个系统之后，第一步要做的就是系统的优化，用户创建及一些安全性相关的设置。
 
 ###一.服务器端的各项准备工作
-应用的部署使用了一个ruby写的叫做Capistrano的工具，它是一个Remote multi-server automation tool，一个远程服务器自动部署的工具集，支持插件。只要在服务器上把基础环境准备好后，应用的配置和部署，只需要在本地客户端上敲几个命令即可，特别是多服务器端的时候特别方便了。    
+应用的部署使用了一个ruby写的叫做[Capistrano](https://github.com/capistrano/capistrano)的工具，它是一个远程自动部署的工具，支持插件。只要在服务器上把基础环境准备好后，应用的配置和部署只需要在本地客户端上敲几个命令即可，特别是多服务器端的时候特别方便了。    
 创建好虚拟主机后首先有几个操作需要先做一下的
 更新系统：
 
@@ -143,10 +143,10 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 	cp database.yml.production-sample config/database.yml 
 	vi config/database.yml #然后对用户名密码以及对生产环境对应的host_names进行修改
 
-config/redis.yml 配置文件可以直接使用样例
+`config/redis.yml` 配置文件可以直接使用样例
 	cp redis.yml.sample redis.yml #使用样例的配置即可，无需修改
 	
-environments/production.rb 主要涉及到邮件发送的配置，如果你不想使用操作系统中的sendmail进行发送邮件,你可以选择第三方的smtp服务，
+`environments/production.rb` 主要涉及到邮件发送的配置，如果你不想使用操作系统中的sendmail进行发送邮件,你可以选择第三方的smtp服务，
 比如我就是使用gmail的smtp进行发送的。
 	 
 	 config.action_mailer.delivery_method = :smtp
@@ -164,15 +164,15 @@ environments/production.rb 主要涉及到邮件发送的配置，如果你不�
 		 #config.action_mailer.delivery_method = :sendmail
 		 #config.action_mailer.sendmail_settings = {arguments: '-i'}
 
-initializers/secret_token.rb 这个文件是rails要用的，默认就存在了，只不过用于开发环境的，你需要生成一个新的secret并对这个文件进行修改
+`initializers/secret_token.rb` 这个文件是rails要用的，默认就存在了，只不过用于开发环境的，你需要生成一个新的secret并对这个文件进行修改
 	bundle exec rake secret
 	
-将生成的字符串用到initializers/secret_token.rb文件中
+将生成的字符串用到`initializers/secret_token.rb`文件中
 
 最后这个文件除了注释掉的只剩下一行
 	Discourse::Application.config.secret_token = "你生成的token贴到这里"
 
-config/thin.yml 是用于thin的配置文件，
+`config/thin.yml` 是用于thin的配置文件，
 	cp config/thin.yml.sample config/thin.yml
 在config/thin.yml最后加上一行
 	onebyone: true
@@ -195,8 +195,11 @@ config/thin.yml 是用于thin的配置文件，
 	daemonize: true
 	onebyone: true
 
-config/nginx.conf
-cp config/nginx.conf.sample config/nginx.conf 这是nginx的配置文件，下面是我的配置，upstream里面内容和thin的配置对应,还要记得修改server_name以及location的root的位置
+`config/nginx.conf`
+	
+	cp config/nginx.conf.sample config/nginx.conf
+
+这是nginx的配置文件，下面是我的配置，upstream里面内容和thin的配置对应,还要记得修改server_name以及location的root的位置
 
 	upstream discourse {
 	  server unix:///home/apps/discourse/shared/sockets/thin.0.sock;
@@ -391,3 +394,11 @@ cp Capfile.sample Capfile
 	bundle install
 	cap deploy:setup
 	cap deploy:cold #第一次运行之后更新重启的时候只需要 cap deploy 便可
+	
+
+升级部署
+	
+	git fetch upstream
+	git merge upstream/master
+	git push origin master
+	cap deploy

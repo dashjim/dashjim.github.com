@@ -7,6 +7,8 @@ tags:
 - rails
 - discourse
 ---
+> 大家可以到这里来讨论 Discourse的安装  [http://www.mydiscourse.org/t/discourse/27](http://www.mydiscourse.org/t/discourse/27)
+
 
 [Discourse](http://discourse.org/)是一个开源的论坛程序，由Stack Overflow的联合创始人之一Jeff Atwood在离开Stack Overflow后组队创建。他们的目标很宏伟，就是创建一个面向未来十年的论坛程序。具体的一些论坛的特性可以到其官网上查看，这里主要讨论一些其技术相关的东西。
 Discourse的源码托管在github,[https://github.com/discourse/discourse](https://github.com/discourse/discourse)，使用了以下一些相关技术：

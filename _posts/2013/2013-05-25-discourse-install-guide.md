@@ -11,30 +11,33 @@ tags:
 
 
 [Discourse](http://discourse.org/)是一个开源的论坛程序，由Stack Overflow的联合创始人之一Jeff Atwood在离开Stack Overflow后组队创建。他们的目标很宏伟，就是创建一个面向未来十年的论坛程序。具体的一些论坛的特性可以到其官网上查看，这里主要讨论一些其技术相关的东西。
-Discourse的源码托管在github,[https://github.com/discourse/discourse](https://github.com/discourse/discourse)，使用了以下一些相关技术：
+Discourse的源码托管在github上,[https://github.com/discourse/discourse](https://github.com/discourse/discourse)，使用了以下一些相关技术：
 
-- Ruby on Rails ，Discourse的后端其实是一个rails的app,拥有RESTful的api，api返回数据格式都是JSON格式。
-- Ember.js ，前端是一个Ember.js的app，和rails的api进行交互，他们使用这个Ember.js的原因可以参考这篇博文[http://eviltrout.com/2013/02/10/why-discourse-uses-emberjs.html](http://eviltrout.com/2013/02/10/why-discourse-uses-emberjs.html),博主在Discourse项目中主要担任前端开发工作，他的观点就是如果一个web应用是一个强交互应用的话，那么就可以使用Client MVC的js框架
+- Ruby on Rails ，Discourse的后端是一个rails的app,RESTful的api，返回JSON格式的数据
+- Ember.js ，Discourse的前端是一个Ember.js的app，和rails的api进行交互，他们使用这个Ember.js的原因可以参考这篇博文[http://eviltrout.com/2013/02/10/why-discourse-uses-emberjs.html](http://eviltrout.com/2013/02/10/why-discourse-uses-emberjs.html),此博主在Discourse项目中主要担任前端开发工作，他的观点就是如果一个web应用是一个强交互应用的话，那么使用Client MVC的js框架将利大于弊
 - PostgreSQL ， 主要的数据都使用PostgreSQL进行存储，这个具有学院派风格的数据库经过多年的发展，稳定性，性能都非常不错，功能全面也是其一大特色。
 - Redis ，使用Redis这个kv数据库用于任务队列等功能
 
-如果你想使用Discourse搭建一个论坛，那么一个虚拟主机（VPS）是必不可少的了。本文所使用的主机是在Digital Ocean上申请的，机房选择的是旧金山，国内的访问速度还可以，我是比较熟悉Debian系（比如Debian，Ubuntu...）的Linux发行版本，安装软件直接apt-get解决，非常的方便。所以就选了Debian 7.0 x32 Server，512MB Ram，20GB SSD Disk，不过官方建议的最低内存是1G。
-创建好一个系统之后，第一步要做的就是系统的优化，用户创建及一些安全性相关的设置。
-
+如果你想使用Discourse搭建一个论坛，那么一个虚拟主机（VPS）是必不可少的了。本文所使用的主机是在Digital Ocean上申请的，机房选择的是旧金山，国内的访问速度还可以，我是比较熟悉Debian系（比如Debian，Ubuntu...）的Linux发行版本，安装软件直接apt-get解决，非常的方便。所以就选了Debian 7.0 x32 Server，512MB Ram，20GB SSD Disk，不过Discourse官方建议的最低内存是1G。    
+<br>
+应用的部署使用了一个ruby写的叫做[Capistrano](https://github.com/capistrano/capistrano)的工具，它是一个远程自动部署的工具，支持插件比如这次就使用了一个Capistrano的rbenv插件。    
+Capistrano的使用中涉及到两方：一方是客户端，也就是发起运行Capistrano的一方，Capistrano的配置文件都在客户端；另一方是服务器端，也就是最终应用部署的目标容器。我们在客户端中配置好Capistrano以及发布的脚本，然后运行之，Capistrano便会根据脚本通过ssh连接到服务器上进行部署的各项工作，这些步骤无需我们直接操作，我们只需要看着命令行中输出的log便可。   
+    
 ###一.服务器端的各项准备工作
-应用的部署使用了一个ruby写的叫做[Capistrano](https://github.com/capistrano/capistrano)的工具，它是一个远程自动部署的工具，支持插件。只要在服务器上把基础环境准备好后，应用的配置和部署只需要在本地客户端上敲几个命令即可，特别是多服务器端的时候特别方便了。    
-创建好虚拟主机后首先有几个操作需要先做一下的
+
+创建好虚拟主机后服务器端的一些工作
+
+####0.准备工作
 更新系统：
 
 	apt-get update
 	apt-get upgrade
 	apt-get install vim #默认的vi不太好用,你也可以选择别的编辑器比如nano
-	
+
 确认下hostname
  	
 	vi /etc/hosts #比如 127.0.0.1       localhost mydiscourse.org
-
-<br>
+   
 ####1.创建交换区
 有些虚拟机提供商可能默认就创建好交换区了，你可以通过free命令来查看，如果free的结果中看到类似如下这一行的时候，说明已经存在swap分区了
 
@@ -70,26 +73,33 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 要设置ssh验证方式，首先得在客户端也就是本机（desktop）上生成密钥对（如果你之前已经有了可以跳过此步）
 
 	ssh-keygen
-	
-这个时候会在~/.ssh 目录下生成了两个文件 id_rsa 和 id_rsa.pub，前者为私有，后者为公钥，你需要将公钥内容加到服务器端对应用户的 ~/.ssh/authorized_keys 文件中，如果authorized_keys不存在则你需要创建一下。
+
+这个时候会在~/.ssh 目录下生成了两个文件 id_rsa 和 id_rsa.pub，前者为私有，后者为公钥，你需要将公钥内容加到服务器端对应用户的 `~/.ssh/authorized_keys` 文件中，如果authorized_keys不存在则你需要创建一下。
 然后为了安全性 设置下相关目录的权限
-	
+
 	chown -R apps:apps .ssh
 	chmod 700 .ssh
 	chmod 600 .ssh/authorized_keys
 
-这个时候你可以从客户端直接ssh 过去而不用输入用户密码了，假设这个时候你以apps登录下，我们再把密码验证登录验证的方式关掉。
+这个时候你可以从客户端直接ssh连 过去而不用输入用户密码了，假设这个时候你以apps登录下，我们再把密码验证登录验证的方式关掉。
 
-	sudo vi /etc/ssh/sshd_config #加上 PasswordAuthentication no	以及 PermitRootLogin no
-	sudo service ssh restart #重启 sshd服务
+	#设置成 PasswordAuthentication no	以及 PermitRootLogin no
+	sudo vi /etc/ssh/sshd_config
+	
+	#重启 sshd服务
+	sudo service ssh restart 
 
 ####3.安装必要的软件
-	
+
+
+	#编译ruby所需的基础库
 	sudo apt-get install build-essential openssl libreadline6 libreadline6-dev \
              curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev \
              sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev libgdbm-dev \
              ncurses-dev automake libtool bison subversion pkg-config libffi-dev
+	#安装nginx
 	sudo apt-get install nginx
+	#安装PostgreSQL redis
 	sudo apt-get install postgresql-9.1 postgresql-contrib-9.1 redis-server \
 	                     libxml2-dev libxslt-dev libpq-dev make g++
 						 
@@ -100,62 +110,70 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 	createdb -U apps discourse_production
 
 由于Discourse有邮件发送的需求，如果你想使用系统本身来发邮件，那么你还得安装sendmail
-	
-	apt-get install sendmail
-###二.客户端的准备工作
+
+	apt-get install sendmail    
 <br>
+###二.客户端的工作
+   
 ####1.客户端安装基础软件
 安装git，如果你是使用Linux那么直接使用相关的包管理软件进行安装，如果你使用的是Mac那么可以使用macprot或者brew这些第三方的包管理软件进行安装。当然如果你要使用源码编译的方式安装也是可以的。
 安装ruby，你可以直接安装（包管理软件安装或者源码编译），也可以通过ruby版本管理的软件进行间接安装，比如rvm，rbenv。我这里选择了rbenv。
 如果你是Linux你得确保编译所需的软件包都安装就绪
-	
+
 	sudo apt-get install build-essential openssl libreadline6 libreadline6-dev \
              curl git-core zlib1g zlib1g-dev libssl-dev libyaml-dev libsqlite3-dev \
              sqlite3 libxml2-dev libxslt-dev autoconf libc6-dev libgdbm-dev \
              ncurses-dev automake libtool bison subversion pkg-config libffi-dev
-			 
+
 如果你是Mac，那么XCode以及XCode命令行工具你得安装就位。
 
 安装rbenv以及通过rbenv安装ruby
 
+	#安装rbenv
 	git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
 	echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
 	echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 	exec $SHELL -l
+	
+	#安装rbenv的ruby-build插件，方便ruby版本的安装
 	git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
-	rbenv install 2.0.0-p195; rbenv global 2.0.0-p195
-	rbenv rehash
+	#安装rbenv的rehash插件，安装了新的gem后再也不用运行rbenv rehash了:)
+	git clone https://github.com/sstephenson/rbenv-gem-rehash.git ~/.rbenv/plugins/rbenv-gem-rehash
+	
+	#安装ruby-2.0.0-p195以及bundler
+	rbenv install 2.0.0-p195; 
+	rbenv global 2.0.0-p195
 	gem install bundler
-	rbenv rehash
 
 
 ####2.git库的相关操作
 如果你想自己做一些自定义的开发工作或者想为discourse这个开源项目贡献自己的代码，那么你去注册一个github的账号是必不可少的了。
-然后从 https://github.com/discourse/discourse fork一个git库出来，比如我fork出来的地址为 https://github.com/kejinlu/discourse
+然后从 [https://github.com/discourse/discourse](https://github.com/discourse/discourse) fork一个git库出来，比如我fork出来的地址为 [https://github.com/kejinlu/discourse](https://github.com/kejinlu/discourse)
 
+	#克隆远程库到本地
 	git clone git@github.com:kejinlu/discourse.git
 	cd discourse
-	git remote add upstream git@github.com:discourse/discourse.git #增加上游库,以便将上游的更新合并过来
+	#增加上游库,以便将上游的更新合并过来
+	git remote add upstream git@github.com:discourse/discourse.git 
 
 ####3.准备Discourse生产环境所需的配置文件
-	config/database.yml
-	config/redis.yml 
-	environments/production.rb
-	initializers/secret_token.rb
-	config/thin.yml
-	config/nginx.conf
 
-`config/database.yml`是数据库的配置文件，主要配置数据库的用户名密码，以及相关hostname
-	 
+- config/database.yml
+数据库的配置文件，主要配置数据库的用户名密码，以及相关hostname
+ 
 	cp database.yml.production-sample config/database.yml 
-	vi config/database.yml #然后对用户名密码以及对生产环境对应的host_names进行修改
+	#然后对用户名密码以及对生产环境对应的host_names进行修改
+	vi config/database.yml 
 
-`config/redis.yml` 配置文件可以直接使用样例
+- config/redis.yml
+配置文件可以直接使用样例
+
 	cp redis.yml.sample redis.yml #使用样例的配置即可，无需修改
-	
-`environments/production.rb` 主要涉及到邮件发送的配置，如果你不想使用操作系统中的sendmail进行发送邮件,你可以选择第三方的smtp服务，
-比如我就是使用gmail的smtp进行发送的。
-	 
+
+- environments/production.rb
+次配置文件主要需要修改就是邮件发送的配置，如果你不想使用操作系统中的sendmail进行发送邮件,你可以选择第三方的smtp服务，
+比如我就是使用gmail的smtp进行发送的，相关配置如下：
+
 	 config.action_mailer.delivery_method = :smtp
 	 config.action_mailer.perform_deliveries = true
 	 config.action_mailer.raise_delivery_errors = true
@@ -171,18 +189,26 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 		 #config.action_mailer.delivery_method = :sendmail
 		 #config.action_mailer.sendmail_settings = {arguments: '-i'}
 
-`initializers/secret_token.rb` 这个文件是rails要用的，默认就存在了，只不过用于开发环境的，你需要生成一个新的secret并对这个文件进行修改
+- initializers/secret_token.rb
+这个文件是rails要用的，默认就存在了，只不过用于开发环境的，你需要生成一个新的secret并对这个文件进行修改
+
 	bundle exec rake secret
-	
+
 将生成的字符串用到`initializers/secret_token.rb`文件中
 
 最后这个文件除了注释掉的只剩下一行
+
 	Discourse::Application.config.secret_token = "你生成的token贴到这里"
 
-`config/thin.yml` 是用于thin的配置文件，
+- config/thin.yml
+是用于thin的配置文件，
+
 	cp config/thin.yml.sample config/thin.yml
+
 在config/thin.yml最后加上一行
+
 	onebyone: true
+
 当然你也可以自己设置server的数量，一个server在运行的时候对应一个thin的进程，如果你的内存有线可以适当的减少server的数量，比如我设置成了2
 
 	---
@@ -202,8 +228,8 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 	daemonize: true
 	onebyone: true
 
-`config/nginx.conf`
-	
+- config/nginx.conf
+
 	cp config/nginx.conf.sample config/nginx.conf
 
 这是nginx的配置文件，下面是我的配置，upstream里面内容和thin的配置对应,还要记得修改server_name以及location的root的位置
@@ -264,7 +290,7 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 	}
 
 
-由于上面的一些配置中涉及到一些敏感信息，你不不能将其放到public的库中，要不放到私有库中，要么将这些敏感文件加入git的ignore
+由于上面的一些配置中涉及到一些敏感信息，你不不能将其放到public的库中，要不放到私有库中，要么将这些敏感文件加入git的ignore。如果将上述的文件加入ignore的话，那么在下面的deploy脚本中需要将本地的配置在部署的过程中拷贝到目标服务器中，作为生产环境的配置文件，如果你把正式的配置文件都放到了私有的库中，那么这些配置文件其实就没有必要从客户端再拷贝了，下文的deploy.rb脚本中就有从本地拷贝这些配置的过程。
 
 ####4.配置Capistrano
 
@@ -272,8 +298,10 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 
 	gem 'capistrano', require: nil
 	gem 'capistrano-rbenv', require: nil
-	
-cp Capfile.sample Capfile
+
+增加Capfile
+
+	cp Capfile.sample Capfile
 
 创建config/deploy.rb
 
@@ -397,6 +425,7 @@ cp Capfile.sample Capfile
 
 
 ####5.运行Capistrano
+初次安装部署
 
 	bundle install
 	cap deploy:setup
@@ -404,7 +433,8 @@ cp Capfile.sample Capfile
 	
 
 升级部署
-	
+
+
 	git fetch upstream
 	git merge upstream/master
 	git push origin master

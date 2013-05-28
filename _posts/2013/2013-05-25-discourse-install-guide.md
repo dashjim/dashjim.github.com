@@ -32,7 +32,7 @@ Discourse的源码托管在github,[https://github.com/discourse/discourse](https
  	
 	vi /etc/hosts #比如 127.0.0.1       localhost mydiscourse.org
 
-
+<br>
 ####1.创建交换区
 有些虚拟机提供商可能默认就创建好交换区了，你可以通过free命令来查看，如果free的结果中看到类似如下这一行的时候，说明已经存在swap分区了
 
@@ -57,9 +57,9 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 最后再次通过free命令确认下交换分区是否创建成功。
 
 ####2.创建发布用户
-在Linux中，用户管理一直都是一个和安全息息相关的问题，如果控制好用户的权限非常的重要。
+在Linux中，用户管理是一个和系统安全息息相关的问题，所以控制好用户的权限非常的重要。
 首先在服务器上需要创建一个专门用于Capistrano发布的账户，我们叫他deploy user,并且将账户的登录方式限制为证书认证的方式，禁掉密码认证的登录方式（甚至可以附带关闭root ssh登录系统的权限），这些设置都是在sshd的配置文件中进行设置。
-一开始是root登录，这时你需要增加一个deploy user，我们就假设名字为 apps
+一开始是root登录，这时你需要增加一个deploy user，我们就假设名字为 `apps`
 
 	adduser apps #增加一个用户 apps
 	adduser apps sudo #将apps用户加到sudo组，使其可以使用sudo

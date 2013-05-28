@@ -58,7 +58,7 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 
 ####2.创建发布用户
 在Linux中，用户管理是一个和系统安全息息相关的问题，所以控制好用户的权限非常的重要。
-首先在服务器上需要创建一个专门用于Capistrano发布的账户，我们叫他deploy user,并且将账户的登录方式限制为证书认证的方式，禁掉密码认证的登录方式（甚至可以附带关闭root ssh登录系统的权限），这些设置都是在sshd的配置文件中进行设置。
+首先在服务器上需要创建一个专门用于Capistrano发布的账户，我们叫他deploy user,并且将账户的登录方式限制为公私钥认证的方式，禁掉密码认证的登录方式（甚至可以附带关闭root ssh登录系统的权限），这些设置都是在sshd的配置文件中进行设置。
 一开始是root登录，这时你需要增加一个deploy user，我们就假设名字为 `apps`
 
 	adduser apps #增加一个用户 apps
@@ -101,6 +101,7 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 	
 	apt-get install sendmail
 ###二.客户端的准备工作
+<br>
 ####1.客户端安装基础软件
 安装git，如果你是使用Linux那么直接使用相关的包管理软件进行安装，如果你使用的是Mac那么可以使用macprot或者brew这些第三方的包管理软件进行安装。当然如果你要使用源码编译的方式安装也是可以的。
 安装ruby，你可以直接安装（包管理软件安装或者源码编译），也可以通过ruby版本管理的软件进行间接安装，比如rvm，rbenv。我这里选择了rbenv。
@@ -113,13 +114,17 @@ Digital Ocean默认是没有帮你创建好交换分区的，创建的方式如�
 			 
 如果你是Mac，那么XCode以及XCode命令行工具你得安装就位。
 
+安装rbenv以及通过rbenv安装ruby
+
 	git clone git://github.com/sstephenson/rbenv.git ~/.rbenv
 	echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bash_profile
 	echo 'eval "$(rbenv init -)"' >> ~/.bash_profile
 	exec $SHELL -l
 	git clone https://github.com/sstephenson/ruby-build.git ~/.rbenv/plugins/ruby-build
 	rbenv install 2.0.0-p195; rbenv global 2.0.0-p195
+	rbenv rehash
 	gem install bundler
+	rbenv rehash
 
 
 ####2.git库的相关操作

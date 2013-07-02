@@ -6,25 +6,29 @@
     <title>{{ page.title }} | {{ site.author }}</title>
     <link rel="shortcut icon" href="/favicon.ico">
     <link href="/feed/" rel="alternate" title="{{ site.author }}" type="application/atom+xml" />
-    <link rel="stylesheet" href="/media/css/style.css">
+    
     <link rel="stylesheet" href="/media/css/highlight.css">
+    <link href='/media/webfonts/ss-social.css' rel='stylesheet'>
+    <link href='/media/webfonts/ss-standard.css' rel='stylesheet'>
+    <link href="/media/css/screen.css" rel="stylesheet">
+
     <script type="text/javascript" src="/media/js/jquery-1.7.1.min.js"></script>
   </head>
   <body>
     <div id="container">
       <div id="main" role="main">
         <header>
+        <div class="buttons">
+          <a href="/" class="ss-icon" title="Go to homepage">home</a>
+          <a href="/categories" class="ss-icon" title="Category" >list</a>
+          <a href="/tags" class="ss-icon" title="Tag Cloud" >tags</a>
+          <a href="/guestbook" class="ss-icon" title="Guest Book" >talk</a>
+          <a href="/about" class="ss-icon" title="About" >user</a>
+          <a href="/feed" class="ss-icon" title="Subscribe by RSS" >rss</a>
+        </div>
         <h1>{{ page.title }}</h1>
         </header>
-        <nav>
-        <span><a title="home page" class="" href="/">Home</a></span>
-        <span><a title="about" class="" href="/about/">About</a></span>
-        <span><a title="guestbook" class="" href="/guestbook/">Guestbook</a></span>
-        <span><a title="categories" class="" href="/categories/">Categories</a></span>
-        <span><a title="tags" class="" href="/tags/">Tags</a></span>
-        <span><a title="links" class="" href="/links/">Links</a></span>
-        <span><a title="subscribe by RSS" class="" href="/feed/">Subscribe</a></span>
-        </nav>
+        <hr>
         <article class="content">
         {{ content }}
         </article>

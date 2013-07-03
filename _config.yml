@@ -3,4 +3,4 @@ permalink: /:year/:month/:title/
 url: http://geeklu.com
 author: 卢克
 pygments: true
-paginate: 16
+paginate: 24

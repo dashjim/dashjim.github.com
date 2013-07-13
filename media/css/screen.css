@@ -62,7 +62,8 @@ body{
 }
 
 body>div {
-    width: 40em;
+    width: 80%;
+    min-width: 32em;
     padding: 3em 3em 1.5em;
     margin: 3em auto;
     background-color: #fff;

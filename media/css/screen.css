@@ -125,14 +125,12 @@ dt {
 pre {
     border-left: 6px solid #edebea;
     overflow: auto;
-    font-family: 'Droid Sans Mono', monospace;
     font-size: 14px;
     padding: 12px;
     margin: 0 0 24px;
 	background-color: #f3f3f3;
 }
 p code {
-    font-family: 'Droid Sans Mono', monospace;
     font-size: 14px;
     border: 1px solid #edebea;
 }

@@ -1,4 +1,4 @@
-此Git库为我的博客  [七扯](http://blog.sevenCHE.com)，意为七拉八扯。
+此Git库为我的博客  [七扯](http://blog.sevenCHE.com)。
 使用Jekyll进行搭建，Jekyll是一个Ruby写的程序，可以将Markdown写的文章通过模板生成最终的Html静态文件。
 博客文章的评论功能使用了Disqus。
 

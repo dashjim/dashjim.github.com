@@ -1,6 +1,6 @@
 markdown: rdiscount
 permalink: /:year/:month/:title/
-url: http://geeklu.com
-author: 卢克
+url: http://blog.sevenche.com
+author: Jim
 pygments: true
 paginate: 24

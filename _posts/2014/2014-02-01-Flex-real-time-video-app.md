@@ -21,10 +21,12 @@ tags:
 
 #### 服务器上抓包
 > **NOTE:**
-> 需要注意抓包的准确性问题。在服务器上如果用tcpdump抓包，特别是像视频实时应用的时候由于数据量大，tcpdump依赖的底层库可能会来不及处理而buffer溢出，使得数据文件不完整。这样在用wireshark分析的时候会看到的丢包量就是不准确的。解决方法参考[tcpdump抓包丢失问题](http://wenku.baidu.com/view/74b3166e1eb91a37f1115cf6.html)。
+> 需要注意抓包的准确性问题。在服务器上如果用tcpdump抓包，特别是像视频实时应用的时候由于数据量大，tcpdump依赖的底层库可能会来不及处理而buffer溢出，使得数据文件不完整。这样在用wireshark分析的时候会看到的丢包量就是不准确的。
+![](/media/pic2014/0201-2.png)
+解决方法参考[tcpdump抓包丢失问题](http://wenku.baidu.com/view/74b3166e1eb91a37f1115cf6.html)。
 
 在分析抓到的包时我们看到大量的丢包，如下图：
-![](/media/pic/14/140120-packetloss.jpg)
+![](/media/pic2014/0201-1.png)
 
 更多测试的结果
 
@@ -32,17 +34,17 @@ tags:
 
 这轮测试下来得出的重要结论是**TCP在WCDMA3G下的网速远达不到其宣称值**！因为丢包会导致TCP误以为是网络拥塞，而双方减小收发窗口，主动降速。
 下图就是我实测的TCP网速。
-![](/media/pic/14/140120-1.png)
+![](/media/pic2014/0201-3.png)
 再来看一下维基是怎么说这个问题的：
-[TCP_over_wireless_networks](http://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_over_wireless_networks)
-`
-TCP has been optimized for wired networks. Any packet loss is considered to be the result of network congestion and the congestion window size is reduced dramatically as a precaution. However, wireless links are known to experience sporadic and usually temporary losses due to fading, shadowing, hand off, and other radio effects, that cannot be considered congestion. After the (erroneous) back-off of the congestion window size, due to wireless packet loss, there can be a congestion avoidance phase with a conservative decrease in window size. This causes the radio link to be underutilized. Extensive research has been done on the subject of how to combat these harmful effects. Suggested solutions can be categorized as end-to-end solutions (which require modifications at the client or server),[38] link layer solutions (such as RLP in cellular networks), or proxy based solutions (which require some changes in the network without modifying end nodes).
-`
+> [TCP_over_wireless_networks](http://en.wikipedia.org/wiki/Transmission_Control_Protocol#TCP_over_wireless_networks)
 
-[参考3G的标称网速](http://en.wikipedia.org/wiki/3g)
-`
-HSPA is an amalgamation of several upgrades to the original W-CDMA standard and offers speeds of **14.4 Mbit/s** down and **5.76 MBit/s** up. HSPA is backwards compatible with and uses the same frequencies as W-CDMA.
-`
+> TCP has been optimized for wired networks. Any packet loss is considered to be the result of network congestion and the congestion window size is reduced dramatically as a precaution. However, wireless links are known to experience sporadic and usually temporary losses due to fading, shadowing, hand off, and other radio effects, that cannot be considered congestion. After the (erroneous) back-off of the congestion window size, due to wireless packet loss, there can be a congestion avoidance phase with a conservative decrease in window size. This causes the radio link to be underutilized. Extensive research has been done on the subject of how to combat these harmful effects. Suggested solutions can be categorized as end-to-end solutions (which require modifications at the client or server),[38] link layer solutions (such as RLP in cellular networks), or proxy based solutions (which require some changes in the network without modifying end nodes).
+
+
+> [参考3G的标称网速](http://en.wikipedia.org/wiki/3g)
+ 
+> HSPA is an amalgamation of several upgrades to the original W-CDMA standard and offers speeds of **14.4 Mbit/s** down and **5.76 MBit/s** up. HSPA is backwards compatible with and uses the same frequencies as W-CDMA.
+
 注意标称网速不包括自身的信令消耗，所以150M的WiFi实际数据传输速度超不过80兆。3G消耗的信令可能更多。
 
 #### 如何改进
@@ -57,4 +59,3 @@ HSPA is an amalgamation of several upgrades to the original W-CDMA standard and 
 
 **UDP**
 使用基于UDP的传输协议可以从根本上解决以上问题。
-----

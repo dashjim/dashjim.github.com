@@ -157,9 +157,11 @@ hr {
 }
 a {
     color: #EE0000;
+	text-decoration: none;
 }
 a:visited {
     color: #B22222;
+	text-decoration: none;
 }
 a.ss-icon {
 	font-size: 20px;

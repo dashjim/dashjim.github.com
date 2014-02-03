@@ -9,7 +9,7 @@ tags:
 
 > 本文始于自己Evernote，由于大部分原本是英文记录的，所以干脆全部用英文。
 
-> Most of the content comes from my Evernote, therefore, this post will be updated once I have more on my note and your contribution is highly appropriated. 
+> Most of the content comes from my Evernote, therefore, this post will be updated once I have more notes, and you are welcome to contribute your notes to this article.
 
 ### How to see simple git log?
 -------------

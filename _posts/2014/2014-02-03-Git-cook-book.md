@@ -11,7 +11,7 @@ tags:
 
 
 
-> 本文始于自己Evernote，由于大部分原本是英文记录的，所以干脆全部用英文。
+本文始于自己Evernote，由于大部分原本是英文记录的，所以干脆全部用英文。
 > Most of the content comes from my Evernote, therefore, this post will be updated once I have more on my note and your contribution is highly appropriated. 
 ----------
 
@@ -45,7 +45,7 @@ git log --follow <filename> (Show rename)
 ```
 ### How to only produce one commit for a merge?
 -----------
-> Usually all local commit history will be merged to the target branch. Below command only produce a new commit for the merge.
+Usually all local commit history will be merged to the target branch. Below command only produce a new commit for the merge.
 ```
 git merge --squash bugfix
 git commit -m 'fix bug'
@@ -67,7 +67,7 @@ git push -f origin master
 
 ### How to find a lost commit?
 --------------
-> As a last resort in case your commit is dangling and not connected to history at all, you can search the reflog itself with the `-g` flag (short for `--walk-reflogs`)
+As a last resort in case your commit is dangling and not connected to history at all, you can search the reflog itself with the `-g` flag (short for `--walk-reflogs`)
 
 ```
 git log -g --grep='Build 0051'
@@ -75,7 +75,7 @@ git log -g --grep='Build 0051'
 **Be aware that the reflog only contains the local history.**
 ### How to know which branch is the most recent?
 --------------------
-> Sort the branches by commit time.
+Sort the branches by commit time.
 
 ```
 git config --global alias.latest "for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)'"

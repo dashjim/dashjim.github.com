@@ -12,11 +12,19 @@ tags:
 
 
 > 本文始于自己Evernote，由于大部分原本是英文记录的，所以干脆全部用英文。
+<<<<<<< HEAD
+=======
+
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 > Most of the content comes from my Evernote, therefore, this post will be updated once I have more on my note and your contribution is highly appropriated. 
 ----------
 
 ### How to see simple git log?
+<<<<<<< HEAD
 -------------
+=======
+
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 ``` 
 git log --oneline
 git log --oneline --graph --decorate
@@ -24,6 +32,7 @@ git config --global alias.pl "log --oneline --graph --decorate"
 git log --oneline -3
 ```
 ### How to see log in another branch?
+<<<<<<< HEAD
 -------------
 ```
 git log origin/master..
@@ -37,6 +46,19 @@ git log --all --grep='a keyword'
 ```
 ### How to see history of one file?
 -------------
+=======
+
+```
+     git log origin/master..
+```
+### How to search keywords in commit comment (across all branches)?
+     If you want to know how a feature was implemented, you can start by search the keywords in the log history.
+     --grep can bring you the entire commit message instead of ONE line which contains the keywords
+     git log --all --grep='a keyword'
+
+### How to see history of one file?
+
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 ```
 git log -- [filename] (show the log history)
 git log -p filename (git generate the patches for each log entry)
@@ -63,14 +85,19 @@ git push -f origin master
 **Notice: git revert will not work here!**
 
 ### How to find a lost commit?
+<<<<<<< HEAD
 --------------
 > As a last resort in case your commit is dangling and not connected to history at all, you can search the reflog itself with the `-g` flag (short for `--walk-reflogs`)
+=======
+> As a last resort in case your commit is dangling and not connected to history at all, you can search the reflog itself with the -g flag (short for --walk-reflogs:
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 
 ```
 git log -g --grep='Build 0051'
 ```
 **Be aware that the reflog only contains the local history.**
 ### How to know which branch is the most recent?
+<<<<<<< HEAD
 --------------------
 > Sort the branches by commit time.
 ```
@@ -78,6 +105,13 @@ git config --global alias.latest "for-each-ref --sort=-committerdate --format='%
 ```
 **Usage:**
 ```
+=======
+>Sort the branches by commit time.
+```
+git config --global alias.latest "for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)'"
+
+**Usage:**
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 $ cd ~/Code/rails/rails && git latest
 2012-11-19 origin/master
 2012-11-19 origin/HEAD
@@ -86,6 +120,7 @@ $ cd ~/Code/rails/rails && git latest
 2012-11-03 origin/encrypted_cookies
 2012-11-03 origin/attributes_perf
 ... snipped ...
+<<<<<<< HEAD
 ```
 **Show local branches only:**
 ```
@@ -93,6 +128,13 @@ git config --global alias.latest "for-each-ref --sort=-committerdate refs/heads 
 ```
 ### How to change the remote HEAD
 ------------
+=======
+
+**Show local branches only:**
+git config --global alias.latest "for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'" 
+```
+### How to change the remote HEAD
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 ```
 git branch -a
 remotes/origin/HEAD -> origin/gh-pages
@@ -106,24 +148,37 @@ remotes/origin/gh-pages
 remotes/origin/master
 ```
 ### How to delete a remote git branch?
+<<<<<<< HEAD
 -------------
+=======
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 ```
 git push origin --delete <branchName>
 ```
 ### How to delete the merge orig file?
+<<<<<<< HEAD
 -------------
+=======
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 ```
 git clean -f
 ```
 But beware... there's no going back. Use -n or --dry-run to preview the damage you'll do.
+<<<<<<< HEAD
  `git-clean`  Remove untracked files from the working tree 
+=======
+ `git-clean` - Remove untracked files from the working tree 
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 If you want to also remove directories, run `git clean -f -d`
 If you just want to remove ignored files, run `git clean -f -X`
 If you want to remove ignored as well as non-ignored files, run `git clean -f -x`
 Note the case difference on the X for the two latter commands.
 
 ### How to know the remote branch names?
+<<<<<<< HEAD
 -------------
+=======
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 ```
 git branch -r
 ```
@@ -135,7 +190,10 @@ $ git push origin master
 ```
 
 ### How to pull a remote branch?
+<<<<<<< HEAD
 -------------
+=======
+>>>>>>> d1c4fc454463d352dde26df89cc999665fa1a296
 Before you can start working locally on a remote branch, you need to fetch it as called out in answers below.
 To fetch a branch, you simply need to:
 ```

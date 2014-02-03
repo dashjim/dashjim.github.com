@@ -13,7 +13,7 @@ tags:
 
 ### How to see simple git log?
 -------------
-``` 
+```bash 
 git log --oneline
 git log --oneline --graph --decorate
 git config --global alias.pl "log --oneline --graph --decorate"
@@ -21,7 +21,7 @@ git log --oneline -3
 ```
 ### How to see log in another branch?
 -------------
-```
+```shell
 git log origin/master..
 ```
 ### How to search keywords in commit comment (across all branches)?

@@ -44,6 +44,7 @@ gitk [filename] (Show the content changed)
 git log --follow <filename> (Show rename)
 ```
 ### How to only produce one commit for a merge?
+-----------
 > Usually all local commit history will be merged to the target branch. Below command only produce a new commit for the merge.
 ```
 git merge --squash bugfix
@@ -51,10 +52,12 @@ git commit -m 'fix bug'
 ```
 
 ### How to only see local commit log?
+-----------
 ```
-     git log --no-merges master..
+git log --no-merges master..
 ```
 ### How to revert to a commit?
+----------------
 ```
 git reset --hard 4a155e5
 and then 
@@ -73,10 +76,13 @@ git log -g --grep='Build 0051'
 ### How to know which branch is the most recent?
 --------------------
 > Sort the branches by commit time.
+
 ```
 git config --global alias.latest "for-each-ref --sort=-committerdate --format='%(committerdate:short) %(refname:short)'"
 ```
+
 **Usage:**
+
 ```
 $ cd ~/Code/rails/rails && git latest
 2012-11-19 origin/master
@@ -86,8 +92,10 @@ $ cd ~/Code/rails/rails && git latest
 2012-11-03 origin/encrypted_cookies
 2012-11-03 origin/attributes_perf
 ... snipped ...
+
 ```
 **Show local branches only:**
+
 ```
 git config --global alias.latest "for-each-ref --sort=-committerdate refs/heads --format='%(committerdate:short) %(refname:short)'" 
 ```

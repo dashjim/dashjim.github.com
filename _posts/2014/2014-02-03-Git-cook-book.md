@@ -135,9 +135,11 @@ git push origin --delete <branchName>
 ### How to delete the merge orig file?
 -------------
 Some automatically generated `*.orig` files will be left in your working folder after a successful merge. One quick way to delete them could be
+
 ```
 git clean -f
 ```
+
 **Beware** There's no going back. Use `-n` or `--dry-run` to preview the damage you'll do.
  `git-clean`  Remove untracked files from the working tree 
 If you want to also remove directories, run `git clean -f -d`
@@ -148,10 +150,12 @@ Note the case difference on the X for the two latter commands.
 ### How to know the remote branch names?
 -------------
 OK, you got a huge repository, maybe the first step is to know the remote branch names.
+
 ```
 git branch -r
 ```
 ### How to rename a file?
+
 ```
 $ git mv README README.md
 $ git commit -m "renamed"
@@ -162,11 +166,14 @@ $ git push origin master
 -------------
 Before you can start working locally on a remote branch, you need to fetch it as called out in answers below.
 To fetch a branch, you simply need to:
+
 ```
 git fetch origin
 git branch -r
 ```
+
 This will fetch all of the remote branches for you. With the remote branches in hand, you now need to check out the branch you are interested in, giving you a local working copy:
+
 ```
 git checkout -b test origin/test
 ```

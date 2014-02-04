@@ -15,11 +15,13 @@ tags:
 
 -------------
 The following let you to see only one line comment for each commit.
+
 ```
 git log --oneline
 git log --oneline -3
 ```
 Below command let you to display Gitk-alike tree to your shell screen. And `--global alias.pl` allows you to use the short form of command. like `$ git pl`.
+
 ```
 git log --oneline --graph --decorate
 git config --global alias.pl "log --oneline --graph --decorate"

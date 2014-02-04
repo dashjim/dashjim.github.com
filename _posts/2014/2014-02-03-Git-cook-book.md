@@ -75,7 +75,7 @@ git reset --hard 4a155e5
 and then 
 git push -f origin master
 ```
-**Notice: git revert will not work here!**
+**Notice** git revert will not work here! `git revert` can only revert one commit. If you have commit `11,22,33,44,` and you `git revert 22` then you will have commit `11,33,44`, but if you `git reset --hard 22` and commit, then you could only have `11` in your commit history.
 
 ### How to find a lost commit?
 --------------

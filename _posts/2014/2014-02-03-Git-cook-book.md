@@ -27,6 +27,7 @@ git log --oneline --graph --decorate
 git config --global alias.pl "log --oneline --graph --decorate"
 ```
 Usage:
+
 ![](/media/pic2014/0203-1.png)
 ### How to see log in another branch?
 -------------

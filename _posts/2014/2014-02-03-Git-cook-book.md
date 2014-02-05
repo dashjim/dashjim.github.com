@@ -54,7 +54,7 @@ git log --follow <filename> (Show rename)
 ```
 ### How to only produce one commit for a merge?
 -----------
-Think about you have a dev branch and a main branch and you have a lot of commits in your dev branch, but when merge code you don't want all those comments go to the main branch(the main branch history could be more meaningful). use `--squash` to only produce one new commit for the merge.
+Think about you have a dev branch and a main branch and you have a lot of commits in your dev branch, but when merge code you don't want all those comment history goes to the main branch(the main branch history could be more meaningful). use `--squash` to only produce one new commit for the merge.
 ```
 git merge --squash bugfix
 git commit -m 'fix bug'

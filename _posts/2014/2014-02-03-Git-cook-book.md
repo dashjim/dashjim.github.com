@@ -46,6 +46,7 @@ git log --all --grep='a keyword'
 ### How to see history of one file?
 -------------
 You have many options to achieve that goal.
+
 ```
 git log -- [filename] (show the log history)
 git log -p filename (Diff the code; git generate the patches for each log entry)
@@ -55,6 +56,7 @@ git log --follow <filename> (Show rename)
 ### How to only produce one commit for a merge?
 -----------
 Think about you have a dev branch and a main branch and you have a lot of commits in your dev branch, but when merge code you don't want all those comment history goes to the main branch(the main branch history could be more meaningful). use `--squash` to only produce one new commit for the merge.
+
 ```
 git merge --squash bugfix
 git commit -m 'fix bug'
@@ -63,6 +65,7 @@ git commit -m 'fix bug'
 ### How to only see local commit log?
 -----------
 The following gives you two ways to see that.
+
 ```
 git log --no-merges master..
 git log -g
@@ -70,6 +73,7 @@ git log -g
 
 ### How to revert to a commit?
 ----------------
+
 ```
 git reset --hard 4a155e5
 and then 

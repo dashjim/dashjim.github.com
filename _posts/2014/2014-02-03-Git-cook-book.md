@@ -1,6 +1,6 @@
 ---
 layout: post-en
-title: Git Cook Book
+title: Git Cookbook
 categories:
 - Common Tec
 tags:

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 《高效能人事的七个习惯》读后感
+title: 《高效能人士的七个习惯》读后感
 categories:
 - Learning
 tags:

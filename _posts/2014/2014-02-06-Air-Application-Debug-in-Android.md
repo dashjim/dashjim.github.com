@@ -29,9 +29,9 @@ adt -package -target apk‑captive‑runtime -storetype pkcs12 -keystore Signing
 
 AIR的SDK目前是3.9，但FB 4.7中自带的还是3.1。如何在FB中升级或切换使用不同的AIR　SDK？官方有如下两篇文档，但是没说清楚反而误导群众。
 
-> http://helpx.adobe.com/flash-builder/kb/overlay-air-sdk-flash-builder.html
+> [http://helpx.adobe.com/flash-builder/kb/overlay-air-sdk-flash-builder.html](http://helpx.adobe.com/flash-builder/kb/overlay-air-sdk-flash-builder.html)
 
-> http://helpx.adobe.com/x-productkb/multi/how-overlay-air-sdk-flex-sdk.html
+> [http://helpx.adobe.com/x-productkb/multi/how-overlay-air-sdk-flex-sdk.html](http://helpx.adobe.com/flash-builder/kb/overlay-air-sdk-flash-builder.html)
     
 需要补充的是，我们要下载**两个不同版本**的AIR　SDK，分别覆盖不同的文件目录（Flex SDK，和Plugin）。之前一定要**做好备份**。
 

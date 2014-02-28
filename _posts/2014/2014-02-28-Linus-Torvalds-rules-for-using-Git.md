@@ -172,5 +172,7 @@ and use it as an explanation of "do this, because that is what Linus
 expects from the end result".
 
                         Linus
+###总结
+Linus特别注意提交历史的干净与可读，其中给出了rebase应该的使用场境。
 
 > 附本文相关文章--[Git-学习路线图及中文资料推荐](http://blog.sevenche.com/2014/02/Git-%E5%AD%A6%E4%B9%A0%E8%B7%AF%E7%BA%BF%E5%9B%BE%E5%8F%8A%E4%B8%AD%E6%96%87%E8%B5%84%E6%96%99%E6%8E%A8%E8%8D%90/)

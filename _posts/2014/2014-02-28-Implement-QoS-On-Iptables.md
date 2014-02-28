@@ -8,7 +8,7 @@ tags:
 ---
 
 QoS本身是一个比较大的话题，但是毫无疑问，对于音频，视频应用来说QoS的作用是巨大的。有工程师跟我说过在实施时加不加QoS有很大的差别。这里特别提醒一下QoS要在网络的所有结点上启用才能发挥最大效果（结点包括，路由器，服务器等），最起码也要保证加在比较繁忙的结点上，不然没有多大意义。
-下面是在Linux服务器上给相关端口加上高优先级的脚本。大家可以举一反三给特定的IP包加上优先级。
+下面是在Linux服务器上通过iptables给相关端口加上高优先级的脚本。大家可以举一反三给特定的IP包加上优先级。
 
 ```
 
@@ -55,7 +55,7 @@ echo "******" `date +"%F %T"` "******" >> $LOGFILE
 $SERVICE iptables save >> $LOGFILE
 echo "$IPTABLES -t mangle -L" >> $LOGFILE
 ```   
-其原理非常简单，就是给所有通过某端口的包加上(`mangle`)特定标志(`dscp 0x22`)，这样相关的。脚本中的`dscp 0x22`是针对Avaya和北电的产品的，不同厂商的产品可能使用不同的数字，请参考单独的页面介绍[Notes on QOS for videoconferencing](http://andrew.triumf.ca/vidconf_QOS.html)。加完后你的`ipdables`看起来应该是这个样子。然后你的包就会优先被处理了。
+其原理非常简单，就是给所有通过某端口的包加上(`mangle`)特定标志(`dscp 0x22`)，这样经过的节点只要支持QoS都会给于相应的优先级。脚本中的`dscp 0x22`是针对Avaya和北电的产品的，不同厂商的产品可能使用不同的数字，请参考单独的页面介绍[Notes on QOS for videoconferencing](http://andrew.triumf.ca/vidconf_QOS.html)。加完后你的`ipdables`看起来应该是这个样子。然后你的包就会优先被处理了。
 
 ```
 Chain POSTROUTING (policy ACCEPT)

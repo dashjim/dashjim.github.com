@@ -7,7 +7,7 @@ tags:
 - Git
 ---
 
-##引言
+###引言
 如何更好的使用Git？作为Git的发明人Torvalds会给出什么样的建议呢？
 [Linus Torvalds的博客］(http://torvalds-family.blogspot.sg/)和他的Mail list里提到过使用Git的一些注意事项。
 

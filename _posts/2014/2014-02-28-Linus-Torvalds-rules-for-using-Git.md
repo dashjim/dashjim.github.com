@@ -9,7 +9,7 @@ tags:
 
 ###引言
 如何更好的使用Git？作为Git的发明人Torvalds会给出什么样的建议呢？
-[Linus Torvalds的博客］(http://torvalds-family.blogspot.sg/)和他的Mail list里提到过使用Git的一些注意事项。
+[Linus Torvalds的博客](http://torvalds-family.blogspot.sg/)和他的Mail list里提到过使用Git的一些注意事项。（该Blog可能国内被墙）
 
 现在开始挖坟啦！话说2009年的某一天Linux 2.6.31内核的分枝合并工作进行的很顺利（你知道现在Linux内核的版本号吗？），Torvalds的心情大好写下一篇与Git有一点点关系的[blog](http://torvalds-family.blogspot.sg/2009/06/happiness-is-warm-scm.html)，然后后面有两个人在回复里问Git应该怎么用呢？
 

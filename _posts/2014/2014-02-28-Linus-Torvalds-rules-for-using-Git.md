@@ -7,6 +7,14 @@ tags:
 - Git
 ---
 
+
+> **导读**  
+
+
+> - 博主自己大约花了二十分钟用来阅读本文，如果你时间不够，请先收藏。  
+> - 本文分为两部分，第一部分较为概略，一般要读到第二部分时才能明白前面说的是什么。  
+> - 本文主要分析了什么时候用rebase，什么时候不能用。同时分析了使用Pull,Merge,Push的时机。
+
 ###引言
 如何更好的使用Git？作为Git的发明人Torvalds会给出什么样的建议呢？
 [Linus Torvalds的博客](http://torvalds-family.blogspot.sg/)和他的Mail list里提到过使用Git的一些注意事项。（该Blog可能国内被墙）
@@ -49,6 +57,8 @@ There's a few rants and rules about this that I did on the mailing lists last me
 
 ###Linus回答
 > 注意Linus的原文就是用Markdown格式写的，下面是原文，我没有加入任何Markdown格式。说明Linus在写邮件的时候是极为注意细节的。大家可以去查看[原文的Raw格式](http://www.mail-archive.com/dri-devel@lists.sourceforge.net/msg39091.html)   
+
+   
 I want clean history, but that really means (a) clean and (b) history.
 
 People can (and probably should) rebase their _private_ trees (their own 

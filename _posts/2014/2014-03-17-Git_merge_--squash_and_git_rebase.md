@@ -41,6 +41,8 @@ Now `dev4` and `dev2` have the same content, but we cannot see `dev4` comes cont
 
 `--squash` will abandon the merge history, so you will not know what was merged. Only use it when you don't want these commit history!
 
+------------------------
+
 ### Rebase
 
 ** Before rebase **

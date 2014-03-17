@@ -7,7 +7,7 @@ tags:
 - Git
 ---
 
-> One advantage for Git comes from its powerful branch management capability, but it will be hard to maintain the commit history between different branches. As Linus said that [Clear and Clean is important for the commit history](http://blog.sevenche.com/2014/02/Linus-Torvalds-rules-for-using-Git/). Here in this article I am going to demonstrate how `git merge --squash`, `git merge`, and `git rebase` will affect the commit history.
+> One advantage for Git comes from its powerful branch management capability, but it will be hard to maintain the commit history between different branches. As Linus said that [Clear and Clean is important for the commit history](http://blog.sevenche.com/2014/02/Linus-Torvalds-rules-for-using-Git/), here in this article I am going to demonstrate how `git merge --squash`, `git merge`, and `git rebase` will affect the commit history.
 
 ### `git merge` and `git merge --squash`
 

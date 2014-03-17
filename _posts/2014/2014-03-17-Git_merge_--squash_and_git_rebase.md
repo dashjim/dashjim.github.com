@@ -38,7 +38,7 @@ git merge dev3
 
 ![git plain merge](/media/pic2014/0317-4.png)
 
-Now `dev4` and `dev2` have the same content, but we cannot see `dev4` comes contains commit form `dev3`, but `dev2` has the information. 
+Now `dev4` and `dev2` have the same content, but we cannot see `dev4` contains commits form `dev3`, but `dev2` has the information. 
 
 ** Conclusion **
 
@@ -47,6 +47,8 @@ Now `dev4` and `dev2` have the same content, but we cannot see `dev4` comes cont
 ------------------------
 
 ### Rebase
+
+`git rebase` acts like automatically `cherrypick` commits into current branch and then reapply the commits in current branch. See below example.
 
 ** Before rebase **
 

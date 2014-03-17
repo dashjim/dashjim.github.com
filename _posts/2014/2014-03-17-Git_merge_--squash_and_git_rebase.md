@@ -1,6 +1,6 @@
 ---
 layout: post-en
-title: Git Cookbook
+title: Git Merge --squash and git rebase explained
 categories:
 - Common Tec
 tags:

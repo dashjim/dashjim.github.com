@@ -13,14 +13,17 @@ tags:
 
 In below example I am going to merge `dev3` into `dev2` and `dev4` by using merge with and without `--squash` parameter. 
 Initial status:
+
 ![](/media/pic2014/0317-2.png)
 
 **merge with `--squash` test**
+
 ```
 git checkout dev4
 git merge --squash dev3
 git commit -a
 ```
+
 We can see changed files in working directory and after commit we don't see `fbcb87a` and `b85fcb7` in the history of `dev4`
 
 **Plain merge **
@@ -29,25 +32,34 @@ We can see changed files in working directory and after commit we don't see `fbc
 git checkout dev2
 git merge dev3
 ```
+
 ![](/media/pic2014/0317-3.png)
+
 Now `dev4` and `dev2` have the same content, but we cannot see `dev4` comes contains commit form `dev3`, but `dev2` has the information. 
 
 ** Conclusion **
+
 `--squash` will abandon the merge history, so you will not know what was merged. Only use it when you don't want these commit history!
 
 ### Rebase
 
 ** Before rebase **
+
 ![](/media/pic2014/0317-0.png)
 
 ** rebase **
+
 ```
 git checkout dev
 git rebase master
 ```
+
 ** After rebase **
+
 > Notice: dev commit ccd4673 changed to 9d76e0b
+
 ![](/media/pic2014/0317-1.png)
 
 ** Conclusion**
+
 Rebase do not like merge - which will cause a commit, and from the tree you cannot see when the dev is split out and when it is merged back. - So Linus calls it is a _clean_ for history.

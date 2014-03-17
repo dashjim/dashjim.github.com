@@ -12,7 +12,8 @@ tags:
 ### `git merge` and `git merge --squash`
 
 In below example I am going to merge `dev3` into `dev2` and `dev4` by using merge with and without `--squash` parameter. 
-Initial status:
+
+** Initial status **
 
 ![](/media/pic2014/0317-2.png)
 
@@ -24,6 +25,8 @@ git merge --squash dev3
 git commit -a
 ```
 
+![git merge](/media/pic2014/0317-3.png)
+
 We can see changed files in working directory and after commit we don't see `fbcb87a` and `b85fcb7` in the history of `dev4`
 
 **Plain merge **
@@ -33,7 +36,7 @@ git checkout dev2
 git merge dev3
 ```
 
-![](/media/pic2014/0317-3.png)
+![git plain merge](/media/pic2014/0317-4.png)
 
 Now `dev4` and `dev2` have the same content, but we cannot see `dev4` comes contains commit form `dev3`, but `dev2` has the information. 
 
@@ -47,7 +50,7 @@ Now `dev4` and `dev2` have the same content, but we cannot see `dev4` comes cont
 
 ** Before rebase **
 
-![](/media/pic2014/0317-0.png)
+![Before rebase](/media/pic2014/0317-0.png)
 
 ** rebase **
 
@@ -60,7 +63,7 @@ git rebase master
 
 > Notice: dev commit ccd4673 changed to 9d76e0b
 
-![](/media/pic2014/0317-1.png)
+![After rebase](/media/pic2014/0317-1.png)
 
 ** Conclusion**
 

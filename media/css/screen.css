@@ -44,6 +44,7 @@ body {
 ol, ul {
 	list-style: none;
 }
+/*
 blockquote, q {
 	quotes: none;
 }
@@ -52,6 +53,14 @@ q:before, q:after {
 	content: '';
 	content: none;
 }
+** JIM added below blockquote style*/
+.content blockquote {
+    border-left: 4px solid #DDDDDD;
+    color: #777777;
+    padding: 0 15px;
+	margin: 15px 0;
+}
+
 table {
 	border-collapse: collapse;
 	border-spacing: 0;
@@ -91,6 +100,7 @@ h2 {
     font-size: 26px;
     line-height: 48px;
     margin: 0 0 24px 0;
+	font-weight: bold;
 }
 h2 i {
 	font-size: 18px;
@@ -99,9 +109,15 @@ h2 i {
 h3 {
     font-size: 18px;
     line-height: 24px;
+	font-weight: bold;
 }
 section>h3 {
     margin: 0 0 24px 0;
+}
+h4 {
+    font-size: 16px;
+    line-height: 12px;
+	font-weight: bold;
 }
 p, ul, ol, dl {
     line-height: 24px;
@@ -144,9 +160,11 @@ hr {
 }
 a {
     color: #EE0000;
+	text-decoration: none;
 }
 a:visited {
     color: #B22222;
+	text-decoration: none;
 }
 a.ss-icon {
 	font-size: 20px;

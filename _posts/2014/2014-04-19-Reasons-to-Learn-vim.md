@@ -1,11 +1,12 @@
 ---
-layout: post-en
+layout: post
 title: 为什么要学习VIM
 categories:
-- Common Tec
+- CommonTec
 tags:
 - vim
 ---
+
 
 > Vim很多很多年前就接触过，但是一直就把它当成过时的一塌糊涂的玩意，没把它当回事。直到最近在Linux上的工作越来越多，又在stackoverflow上见到众多其粉丝的高度评价后才将信将疑开始学习，结果重度沉迷其中，不可自拔，上个周末读其帮助文档读到半夜，到底是什么在吸引我呢？
 

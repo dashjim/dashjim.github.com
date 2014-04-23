@@ -56,8 +56,8 @@ There's a few rants and rules about this that I did on the mailing lists last me
 > wanted.
 
 ###Linus回答
-> 注意Linus的原文就是用Markdown格式写的，下面是原文，我没有加入任何Markdown格式。说明Linus在写邮件的时候是极为注意细节的。大家可以去查看[原文的Raw格式](http://www.mail-archive.com/dri-devel@lists.sourceforge.net/msg39091.html)   
-> 另外如果下文提到的rebase你不是特别清楚的话，请参考[git merge --squash and git rebase explained](http://http://blog.sevenche.com/2014/03/Git_merge_--squash_and_git_rebase/)
+> 注意Linus的原文就是用_Markdown_格式写的，下面是原文，我没有加入任何Markdown格式。说明Linus在写邮件的时候是极为注意细节的。大家可以去查看[原文的Raw格式](http://www.mail-archive.com/dri-devel@lists.sourceforge.net/msg39091.html)   
+> 另外如果下文提到的_rebase_你不是特别清楚的话，请参考:[git merge --squash and git rebase explained](http://http://blog.sevenche.com/2014/03/Git_merge_--squash_and_git_rebase/)
 
    
 I want clean history, but that really means (a) clean and (b) history.

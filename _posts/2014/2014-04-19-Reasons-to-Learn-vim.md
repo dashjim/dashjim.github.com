@@ -1,5 +1,5 @@
 ---
-layout: post-en
+layout: post
 title: 为什么要学习VIM
 categories:
 - Common Tec

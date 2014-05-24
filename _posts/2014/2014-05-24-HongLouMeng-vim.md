@@ -1,6 +1,6 @@
 ---
 layout: post-en
-title: 为什么要学习VIM
+title: 醉过方知酒浓，爱过方知情重－乱弹VIM与《红楼梦》 
 categories:
 - Common Tec
 tags:

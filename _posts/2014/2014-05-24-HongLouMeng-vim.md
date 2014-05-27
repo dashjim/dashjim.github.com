@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 醉过方知酒浓，爱过方知情重－乱弹VIM与《红楼梦》
+title: test fix
 categories:
 - Common Tec
 tags:

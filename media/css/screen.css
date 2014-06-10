@@ -151,6 +151,8 @@ p code {
     font-family: monospace;
     font-size: 14px;
     border: 1px solid #edebea;
+	padding: 1px 5px;
+	background-color: #EEE;
 }
 hr {
     border: 0;

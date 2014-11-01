@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 怎样交叉编译WEBRtc到ARM Linux
+title: 怎样交叉编译WebRtc到ARM Linux
 categories:
 - Common Tec
 tags:
@@ -10,14 +10,18 @@ tags:
 
 ##基本问题和思路
 WebRTC使用Google自家的GYP作为的构建工具，它本身没有针对ARM-Linux平台的构建选项。本人前一阶段需要将其编译到ARM上，而Google上也基本上都是提问题的，没有人给出如何做出来的。本人花了很大精力终于编译出来libwebrtc.a for ARM，希望将经验分享给大家，同时把编译出来的类库放在这里给大家下载，如果您的ARM平台和我差不多的话，应该可以直接用。
+
 其实编译最基本的原理就是将正确的源文件放在一起，给予正确的参数，所以这里基本的方法是抛弃GYP，使用CMAKE来重新写一个编译脚本。第一步是使用Shell脚本来选出来正确的源文件，然后将其改造成CMAKE的Cmakelists.txt，加入ARM CPU相关的参数，最后尝试Build，出编译错误，再回到第一步开始调试。整个过程不断递归直到构建成功。下文将详述上述过程，并提供脚本，但是具体解决编译错误的方法并不在本文论述，有时间的话另开一文。
 
 ##环境
 WebRTC源代码版本：2429
+
 Corss-Compiler: arm-linux-guneabi-gcc
+
 Host OS: Ubuntu
 
 ##源代码Filter脚本
+请注意头部的filter变量。
 ````````````````
 #!/bin/bash
 #----------------------------------------------------------
@@ -998,7 +1002,7 @@ link_directories  ()
 
 修改集中在脚本底部，加入了CPU相关参数和汇编源文件。
 
-···················
+`````````````````````````````````
 
 cmake_minimum_required (VERSION 2.8)
 project (WebRTCEngine)
@@ -1980,4 +1984,4 @@ add_library(${WebRTCEngine_OUTPUT} ${WEBRTC_HEADERS} ${WEBRTC_SOURCES})
 target_link_libraries (${WebRTCEngine_OUTPUT} ${PLATFORM_SPECIFIC_LIBS} ${G729AB_OUTPUT} dl rt)
 
 
-···················
+````````````````````````````````

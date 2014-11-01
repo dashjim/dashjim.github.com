@@ -1005,8 +1005,7 @@ link_directories  ()
 
 修改集中在脚本底部，加入了CPU相关参数和汇编源文件。
 
-
-`````````````````````````````````
+``````````````````````````````````
 
 cmake_minimum_required (VERSION 2.8)
 project (WebRTCEngine)
@@ -1988,4 +1987,4 @@ add_library(${WebRTCEngine_OUTPUT} ${WEBRTC_HEADERS} ${WEBRTC_SOURCES})
 target_link_libraries (${WebRTCEngine_OUTPUT} ${PLATFORM_SPECIFIC_LIBS} ${G729AB_OUTPUT} dl rt)
 
 
-````````````````````````````````
+``````````````````````````````````

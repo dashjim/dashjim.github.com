@@ -23,6 +23,7 @@ tags:
 ### [怎样交叉编译WebRtc到ARM Linux](http://blog.sevenche.com/2014/11/How-to-cross-compile-WebRTC-for-ARM-linux/)
  本人的另一文章。
 
+---------------------
 > 本例子以GitHub Gist的形式嵌入，如果你不能访问Gist则看不到代码。
 
 ---------------------
@@ -31,6 +32,8 @@ tags:
 
 ---------------------
 附：音频Wav文件下载
+
+
 [下载Wav](/media/pic2014/test.wav)
 
 

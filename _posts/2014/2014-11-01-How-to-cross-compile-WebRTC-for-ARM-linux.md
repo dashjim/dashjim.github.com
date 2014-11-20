@@ -13,7 +13,7 @@ WebRTC使用Google自家的GYP作为的构建工具，它本身没有针对ARM-L
 
 其实编译最基本的原理就是将正确的源文件放在一起，给予正确的参数，所以这里基本的方法是抛弃GYP，使用CMAKE来重新写一个编译脚本。第一步是使用Shell脚本来选出来正确的源文件，然后将其改造成CMAKE的Cmakelists.txt，加入ARM CPU相关的参数，最后尝试Build，出编译错误，再回到第一步开始调试。整个过程不断递归直到构建成功。下文将详述上述过程，并提供脚本，但是具体解决编译错误的方法并不在本文论述，有时间的话另开一文。
 
-[libwebrtc.a Audio only version](/media/pic2014/libWebRTCEngine.a)
+[下载：libwebrtc.a Audio only version](/media/pic2014/libWebRTCEngine.a)
 
 ##环境
 WebRTC源代码版本：2429
@@ -87,7 +87,7 @@ echo -e ")\n"
 echo -e "link_directories  ()\n"
 ````````````````
 
-##生成的半成品CMAKE Build Script
+##运行上面脚本所生成的半成品CMAKE Build Script
 ````````````````````
 cmake_minimum_required (VERSION 2.8)
 project (WebRTCEngine)
@@ -1003,7 +1003,7 @@ link_directories  ()
 
 ##最终修改后的可用CMAKE Build脚本
 
-修改集中在脚本底部，加入了CPU相关参数和汇编源文件。
+这是对上面的文件进行手工调试后的结果，修改集中在脚本底部，加入了CPU相关参数和汇编源文件。
 
 ``````````````````````````````````
 

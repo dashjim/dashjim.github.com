@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 提升使用VIM幸福感的几招
+title: 迅速提升使用VIM幸福感的三招
 categories:
 - Common Tec
 tags:

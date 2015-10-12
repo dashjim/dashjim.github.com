@@ -32,10 +32,15 @@ JVisualVM的基本用法是要先连接到JVM上，具体用法谷歌上有的�
 
 这张图里你要先点击CPU Button，然后JVisualVM就已经开始统计VM上Tomcat的运行数据了，在运行一定时间后点击Stop就可生成这段时间内的所有的性能数据。
 
-![](/media/pic2015/0625-0.png)
+![](/media/pic2015/0625-1.png)
 
 
-![](/media/pic2015/0625-0.png)
+![](/media/pic2015/0625-2.png)
+
+![](/media/pic2015/0625-3.png)
+
+
+![](/media/pic2015/0625-4.png)
 
 
 ### 附记

@@ -10,9 +10,9 @@ tags:
 
 > [Swagger](http://swagger.io)是一个新兴的支持多语言（Python, Java等）的Rest服务的编档与API发布工具集。作者在写作本文前搜索了相关的中文介绍，但是发现大多都没有提到重点，特写作此文。
 
-### 你当前的Retful项目还缺什么?
+## 你当前的Retful项目还缺什么?
 
-#### 如何保证文档与API的一至性与准确性
+### 如何保证文档与API的一至性与准确性
 
 
 
@@ -27,13 +27,13 @@ Swagger生成的文档不仅仅是对API的描述，你还可以直接对每API�
 
 ![预览图](/media/pic2015/1012-1.png)
 
-#### 自动生成从API描述文档生成客户端
+### 自动生成从API描述文档生成客户端
 
 
 
 现在文档可以即时发布在服务器上了。这还没完，Swagger还提供了Client工具，可以自动读取Swagger生成的Restful API文档，因为该文档中以经包含了每个API签名的所有信息，这些工具还可以自动生成（Java/Python/JS等）调用这些Restful API客户端的代码。WoW，是不是很Cool？其实一点也不酷哈，在基于SOAP的WebServices协议族里Swagger的这一功能是可以通过Axis与WSDL来实现的，其实Swagger就是借鉴了之前的设计。
 
-### 参考文档
+## 参考文档
 
 1. [Integrating Swagger into a Spring Boot RESTful Webservice with Springfox](http://www.hascode.com/2015/07/integrating-swagger-into-a-spring-boot-restful-webservice-with-springfox/)
 2. [Documenting a REST API with Swagger and Spring MVC](http://blog.zenika.com/index.php?post/2013/07/11/Documenting-a-REST-API-with-Swagger-and-Spring-MVC)

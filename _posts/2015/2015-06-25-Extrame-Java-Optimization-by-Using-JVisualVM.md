@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 提速10倍！- 使用JVisualVM优化你的Java程序
+title: 提速10倍！- 使用JVisualVM优化你的Java、Android程序
 categories:
 - Common Tec
 tags:
@@ -11,25 +11,19 @@ tags:
 
 ### 性能优化的方法论
 
-性能优化一般是在有了性能问题的时候才进行，在进行了一轮优化后，这一活动的较果一定要是可度量的，没有度量的优化是不可能抓住重点的。所以性能优化大体的流程一定是`度量->优化->度量`这样一个个循环。性能优化的最高标准是将其固化到开发的流程中，比如说在每一次Scrum的结尾做一次优化，或者像作者当年那样，将性能度量做到集成测试里，每天都会自动运行并报警。这个最高级别可以称为性能的持续优化级。
+本文不讨论如何具体的优化某一API，模块之类的问题，也不讨论任何算法。本文的重点在于如何发现性能瓶颈，以量化的方式告诉你慢在哪里和为什么慢，一但有了这些数据，接下来的具体优化和效果的度量就是不是问题了。
+
+从方法论上来说，性能优化一般是在有了性能问题的时候才进行，千万不要怀疑某个地方有问题，然后就进行优化！建立在怀疑基础上的工作很可能是无用功。笔者曾见过某创业公司的CEO给Android的Activity写了一个Stack，不显示的Activity会自动被销毁，而他这样做的原因是要节省内存。错了，全错了。孰不知，Android系统会自动管理Activity的生命周期和内存，该优化重复发明轮子不说，还会使得Activity被反复销毁和创建，这客户端和Server都是更大的销耗。
+
+在确定应用程序很慢，一定要优化之后的第一件事情，就是想办法度量整个程序的CPU、IO和内存的销耗。有人会说这很简单嘛，在几个节点上打几个时间戳，写点日志不就行了。错错错，由于程序的执行分支很多，在不同Load下的表现也不同，打时间戳的方式只能见树木，不能见森林呀。比如说我有如下的问题Sping框架在整个程序中消耗多少百分比的CPU？或者在我们的模块中哪个模块是最慢的，有多慢？我要优化哪些地方可以使程序快50％？这些问题怎么回答？本文中将给出答案。
+
+本文推荐的优化大体的流程是`度量->优化->度量`这样一个个循环。性能优化的最高标准是将其固化到开发的流程中，比如说在每一次Scrum的结尾做一次优化，或者像作者当年那样，将性能度量做到集成测试里，每天都会自动运行并报警。这个最高级别可以称为性能的持续优化级。
 
 ### 如何度量
 
-相信大家在开发中一定会产生对程序所依赖的容器，类库，框架甚至JVM的性能产生过疑虑，但是往往双不知如何下手。这就轮到JVisualVM出场，它是Oracle JDK自带的图形化工具，与Android提供的TraceView有类似之处，可以度量VM上每一个方法级别的CPU、内存消耗。然面除此之外，_最重要的是它可以累计每一个package在一段时间内的CPU消耗_，而我们的Java程序中的模块一定是按package来划分的。
+相信大家在开发中一定会产生对程序所依赖的容器，类库，框架甚至JVM的性能产生过疑虑，但是往往双不知如何下手。这就轮到JVisualVM（Android使用TraceView）出场，它是Oracle JDK自带的图形化工具，与Android提供的TraceView有类似之处，可以度量VM上每一个方法级别的CPU、内存消耗。然面除此之外，_最重要的是它可以累计每一个package在一段时间内的CPU消耗_，而我们的Java程序中的模块一定是按package来划分的。
 
 
 ** 如何用JVisualVM度量模块的消耗 **
 
-![Before rebase](/media/pic2014/0317-0.png)
-
-在JVM的层面上无论是你的业务程序还是第三方类库都是字节码。
-
-** After rebase **
-
-> Notice: dev commit ccd4673 changed to 9d76e0b
-
-![After rebase](/media/pic2014/0317-1.png)
-
-** Conclusion**
-
-Rebase do not like merge - which will cause a commit, and from the tree you cannot see when the dev is split out and when it is merged back. - So Linus calls it is a _clean_ for history.
+To be continued...

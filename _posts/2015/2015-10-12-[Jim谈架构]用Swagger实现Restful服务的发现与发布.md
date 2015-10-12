@@ -17,7 +17,7 @@ tags:
 
 在服务器端Restful API做好后，如何让其它的使用者知道我有哪些接口可以调用？接口的细节是什么？如何使用？在现阶段很多公司的做法都是手工维护一个单一的文档，然后把它发布到网上，比如新浪Weibo的公开API。这种做法的最明显问题是随着服务器端API版本的更新，难以维护全部文档的准确性，同时这要消耗额外的人力。
 
-Swagger的Java版本支持'Spring MVC / Boot'，只要在相关的API上加上'@API'的Annotation就可以自动生成对接口的描述，并且可以以JSON或者HTML的形式随服务器发布在**本服务器指定的端口上**。如果不想加入@API还有更懒的办法，参考下面这个开源的小项目，他会自动搜索你的所有的Spring MVC的Restful方法，然后调用Swagger生成文档: [Springfox](http://www.hascode.com/2015/07/integrating-swagger-into-a-spring-boot-restful-webservice-with-springfox/)
+Swagger的Java版本支持`Spring MVC / Boot`，只要在相关的API上加上`@API`的Annotation就可以自动生成对接口的描述，并且可以以JSON或者HTML的形式随服务器发布在**本服务器指定的端口上**。如果不想加入@API还有更懒的办法，参考下面这个开源的小项目，他会自动搜索你的所有的Spring MVC的Restful方法，然后调用Swagger生成文档: [Springfox](http://www.hascode.com/2015/07/integrating-swagger-into-a-spring-boot-restful-webservice-with-springfox/)
 
 下面网页的左边是生成的JSON描述，右边是HTML描述。[预览Swagger生成的文档](http://editor.swagger.io/#/)
 

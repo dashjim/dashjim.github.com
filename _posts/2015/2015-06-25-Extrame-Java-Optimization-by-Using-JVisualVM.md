@@ -71,6 +71,7 @@ log.debug("Current time is: "， new Date());
 ### 附记
 
 **更进一步分析**
+
 和Android平台的TraceView相比JVisualVM还是不够强大。TraceView可以使用工具导出原始数据为CSV格式，笔者基本上都是将原始数据导出后放到数据库里用SQL分析，这样可以随心所欲。
 TraceView可以可视化线程的CPU使用情况，JVisualVM只能看当前线程的状态。
 JVM下有些和VisualVM类似的第三方工具似乎可以导出数据。

@@ -1,10 +1,10 @@
 ---
 layout: post
-title: [Jim谈架构]用Swagger实现Restfull服务的发现与发布
+title: 提速10倍！- 使用JVisualVM优化你的Java程序
 categories:
-- Technology
+- Common Tec
 tags:
-- 架构, Spring MVC, Restfull
+- Java
 ---
 
 

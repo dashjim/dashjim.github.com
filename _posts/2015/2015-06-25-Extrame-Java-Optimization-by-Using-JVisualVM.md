@@ -29,7 +29,13 @@ JDK自带的图形化工具，与Android提供的TraceView有类似之处，可�
 
 JVisualVM的基本用法是要先连接到JVM上，具体用法谷歌上有的是，笔者为了节省自己的宝贵时间就略过去了。好了，现在在谷歌老师的指导下，你的JvisulVM已经连到Tomcat的VM上了，然后你看到了下面的UI。
 ![](/media/pic2015/0625-0.png)
-这张图里你要先点击CPU Button，然后JVisualVM就已经开始统计VM上是数据了，在运行一定时间后点Stop就可会生成这段时间内的所有统计数据。
+
+这张图里你要先点击CPU Button，然后JVisualVM就已经开始统计VM上Tomcat的运行数据了，在运行一定时间后点击Stop就可生成这段时间内的所有的性能数据。
+
+![](/media/pic2015/0625-0.png)
+
+
+![](/media/pic2015/0625-0.png)
 
 
 ### 附记

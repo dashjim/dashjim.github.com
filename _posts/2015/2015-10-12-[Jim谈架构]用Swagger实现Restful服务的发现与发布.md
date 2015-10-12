@@ -20,7 +20,7 @@ tags:
 
 Swagger的Java版本支持`Spring MVC / Boot`，只要在相关的API上加上`@API`的Annotation就可以自动生成对接口的描述，并且可以以JSON或者HTML的形式随服务器发布在**本服务器指定的端口上**。如果不想加入@API还有更懒的办法，参考下面这个开源的小项目，他会自动搜索你的所有的Spring MVC的Restful方法，然后调用Swagger生成文档: [Springfox](http://www.hascode.com/2015/07/integrating-swagger-into-a-spring-boot-restful-webservice-with-springfox/)
 
-下面网页的左边是生成的JSON描述，右边是HTML描述。[预览Swagger生成的文档](http://editor.swagger.io/#/)
+下面网页的左边是生成的JSON描述，右边是HTML描述。[预览Swagger生成的文档](http://editor.swagger.io/#/) （这其实是Swagger提供的Restful API的设计器）
 
 ![预览图](/media/pic2015/1012-0.png)
 Swagger生成的文档不仅仅是对API的描述，你还可以直接对每API做测试！

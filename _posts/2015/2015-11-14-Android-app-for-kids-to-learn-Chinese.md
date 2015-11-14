@@ -37,7 +37,8 @@ tags:
 
 ### Dolch 220 Sight Words
 
-类似的Sight Words是英文阅读中词频最高的。大家可百度了解。http://www.mrsperkins.com/dolch.htm 
+类似的Sight Words是英文阅读中词频最高的。 Sight words make up 50 to 70 percent of any general text. 
+http://www.mrsperkins.com/dolch.htm 
 
 ###《英文三字经》自然拼读
 

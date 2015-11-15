@@ -17,7 +17,7 @@ tags:
 ![预览图](/media/pic2015/1114-1.png)
 
 ## 下载
-[2015-11-14版](/media/pic2015/LearningCard.apk)
+[2015-11-14版](/media/pic2015/LearningCard.apk?raw=true)
 
 ## 使用方法
 

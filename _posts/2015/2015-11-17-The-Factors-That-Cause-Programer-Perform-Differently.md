@@ -17,7 +17,7 @@ tags:
 1. 印度公司使用Strus 1， Hibernate
 2. 印度公司到UAT结束，两名程序员一共用了4个月
 2. 我使用Spring Boot / MVC / Data JPA
-3. 一人用了15个a工作日，加上周末加班有20个Man Day
+3. 一人用了15个工作日，加上周末加班有20个Man Day
 
 代码行数统计与分析 （仅比较Java代码，JS与HTML双方都有一点，但为了方便统计没有包在里面。）
 

@@ -35,6 +35,7 @@ azanApplication: 4177
 统计方法
 ![](/media/pic2015/1117-0.png)
 ![](/media/pic2015/1117-1.png)
+![](/media/pic2015/1117-5.png)
 ![](/media/pic2015/1117-2.png)
 
 由于没有使用Spring Data JPA，他们的代码多出了很多DAO,Form相关的代码，这些在我的实现里是没有的。

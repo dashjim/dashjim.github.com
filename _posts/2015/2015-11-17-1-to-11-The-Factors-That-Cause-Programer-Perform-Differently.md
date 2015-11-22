@@ -32,7 +32,8 @@ azanApplication: 4177
      Form:306
 ```
 
-统计方法
+**统计方法**
+
 ![pic](/media/pic2015/1117-0.PNG)
 
 ![pic](/media/pic2015/1117-1.PNG)
@@ -53,7 +54,8 @@ PrayerAndroid: 1014
 PrayerWeb:2954
 ```
 
-统计方法
+**统计方法**
+
 ![pic](/media/pic2015/1117-3.PNG)
 
 ![pic](/media/pic2015/1117-4.PNG)

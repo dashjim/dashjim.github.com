@@ -34,8 +34,11 @@ azanApplication: 4177
 
 统计方法
 ![pic](/media/pic2015/1117-0.PNG)
+
 ![pic](/media/pic2015/1117-1.PNG)
+
 ![pic](/media/pic2015/1117-5.PNG)
+
 ![pic](/media/pic2015/1117-2.PNG)
 
 由于没有使用Spring Data JPA，他们的代码多出了很多DAO,Form相关的代码，这些在我的实现里是没有的。
@@ -52,6 +55,7 @@ PrayerWeb:2954
 
 统计方法
 ![pic](/media/pic2015/1117-3.PNG)
+
 ![pic](/media/pic2015/1117-4.PNG)
 
 ## 结论 

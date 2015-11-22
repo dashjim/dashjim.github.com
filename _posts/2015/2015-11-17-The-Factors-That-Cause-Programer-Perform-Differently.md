@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 1：11？程序员效率差距的量化分析
+title: 1个顶11个？程序员效率差距的量化分析
 categories:
 - Common Tec
 tags:

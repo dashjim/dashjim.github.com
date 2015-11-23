@@ -38,10 +38,13 @@ azanApplication: 4177
 
 工程一，总数
 ![pic](/media/pic2015/1117-0.PNG)
+
 工程一，DAO + DTO
 ![pic](/media/pic2015/1117-1.PNG)
+
 工程二，总数
 ![pic](/media/pic2015/1117-5.PNG)
+
 工程二，DAO + FORM Bean
 ![pic](/media/pic2015/1117-2.PNG)
 
@@ -58,8 +61,10 @@ PrayerWeb:2954
 ```
 
 **统计方法**
+
 工程一
 ![pic](/media/pic2015/1117-3.PNG)
+
 工程二
 ![pic](/media/pic2015/1117-4.PNG)
 

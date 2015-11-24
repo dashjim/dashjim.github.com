@@ -36,15 +36,13 @@ azanApplication: 4177
 
 **统计方法**
 
-[pic工程一，总数](/media/pic2015/1117-0.PNG)
+[pic工程一，总数](/media/pic2015/1117-0.PNG?raw=true)
 
-[pic工程一，DAO + DTO](/media/pic2015/1117-1.PNG)
+[pic工程一，DAO + DTO](/media/pic2015/1117-1.PNG?raw=true)
 
-[pic工程二，总数](/media/pic2015/1117-5.PNG)
+[pic工程二，总数](/media/pic2015/1117-5.PNG?raw=true)
 
-
-
-[pic工程二，DAO + FORM Bean](/media/pic2015/1117-2.PNG)
+[pic工程二，DAO + FORM Bean](/media/pic2015/1117-2.PNG?raw=true)
 
 由于没有使用Spring Data JPA，他们的代码多出了很多DAO,Form相关的代码，这些在我的实现里是没有的。
 
@@ -60,9 +58,9 @@ PrayerWeb:2954
 
 **统计方法**
 
-[pic工程一](/media/pic2015/1117-3.PNG)
+[pic工程一](/media/pic2015/1117-3.PNG?raw=true)
 
-[pic工程二](/media/pic2015/1117-4.PNG)
+[pic工程二](/media/pic2015/1117-4.PNG?raw=true)
 
 ## 分析 
 

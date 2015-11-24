@@ -23,7 +23,7 @@ tags:
 
 代码行数统计与分析 （仅比较Java代码，JS与HTML双方都有一点，但为了方便统计没有包在里面。）
 
-印度版本总代码行数：** 7385 **
+#### 印度版本总代码行数：** 7385 **
 其中分项统计如下
 
 ```
@@ -36,28 +36,22 @@ azanApplication: 4177
 
 **统计方法**
 
-工程一，总数
+[pic工程一，总数](/media/pic2015/1117-0.PNG)
 
-![pic](/media/pic2015/1117-0.PNG)
+[pic工程一，DAO + DTO](/media/pic2015/1117-1.PNG)
 
-工程一，DAO + DTO
+[pic工程二，总数](/media/pic2015/1117-5.PNG)
 
-![pic](/media/pic2015/1117-1.PNG)
 
-工程二，总数
 
-![pic](/media/pic2015/1117-5.PNG)
-
-工程二，DAO + FORM Bean
-
-![pic](/media/pic2015/1117-2.PNG)
+[pic工程二，DAO + FORM Bean](/media/pic2015/1117-2.PNG)
 
 由于没有使用Spring Data JPA，他们的代码多出了很多DAO,Form相关的代码，这些在我的实现里是没有的。
 
 去除DAO和Form Bean后的代码量: 7385-782-991-306= **5306**
 
 
-**我的代码总行数:  3968 **
+#### 我的代码总行数:  3968
 
 ```
 PrayerAndroid: 1014
@@ -66,13 +60,9 @@ PrayerWeb:2954
 
 **统计方法**
 
-工程一
+[pic工程一](/media/pic2015/1117-3.PNG)
 
-![pic](/media/pic2015/1117-3.PNG)
-
-工程二
-
-![pic](/media/pic2015/1117-4.PNG)
+[pic工程二](/media/pic2015/1117-4.PNG)
 
 ## 分析 
 

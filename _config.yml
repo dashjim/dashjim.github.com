@@ -4,3 +4,6 @@ url: http://linkinsang.github.io
 author: Sang
 pygments: true
 paginate: 24
+markdown: kramdown
+kramdown:
+  input: GFM

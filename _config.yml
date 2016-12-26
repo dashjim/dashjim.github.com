@@ -1,6 +1,9 @@
 markdown: rdiscount
 permalink: /:year/:month/:title/
-url: http://blog.sevenche.com
-author: Jim
+url: http://linkinsang.github.io
+author: Sang
 pygments: true
 paginate: 24
+markdown: kramdown
+kramdown:
+  input: GFM
